@@ -2,23 +2,88 @@
 
 <html lang="es">
     <head>
+        <meta charset="utf-8">
+        <!--Import Google Icon Font-->
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="styles.css"/> 
+        <!--Let browser know website is optimized for mobile-->
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        Hello World!
+<div class="header">
+  <h1>Chania</h1>
+</div>
 
-        <h1>Users</h1>
-        <table>
-            <thead>
-                <th>&nbsp;</th>
-                <th>ID</th>
-                <th>FIRST NAME</th>
-                <th>LAST NAME</th>
-                <th>EMAIL</th>
-            </thead>
-            <tbody id="users">
+<div class="row">
 
-            </tbody>
-        </table>
+<div class="col-3 menu">
+  <ul>
+    <li>The Flight</li>
+    <li>The City</li>
+    <li>The Island</li>
+    <li>The Food</li>
+  </ul>
+</div>
+
+<div class="col-6">
+  <h1>The City</h1>
+  <p>Chania is the capital of the Chania region on the island of Crete. The city can be divided in two parts, the old town and the modern city.</p>
+</div>
+
+<div class="col-3 right">
+  <div class="aside">
+    <h2>What?</h2>
+    <p>Chania is a city on the island of Crete.</p>
+    <h2>Where?</h2>
+    <p>Crete is a Greek island in the Mediterranean Sea.</p>
+    <h2>How?</h2>
+    <p>You can reach Chania airport from all over Europe.</p>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  <p>Resize the browser window to see how the content respond to the resizing.</p>
+</div>
+
+
+
+       
+        <form action="#">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="sample3">
+            <label class="mdl-textfield__label" for="sample3">Text...</label>
+        </div>
+        </form>
+        <!-- Numeric Textfield with Floating Label -->
+        <form action="#">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4">
+            <label class="mdl-textfield__label" for="sample4">Number...</label>
+            <span class="mdl-textfield__error">Input is not a number!</span>
+        </div>
+        </form>
+
+
+        <main>
+            <h1>Users</h1>
+            <table>
+                <thead>
+                    <th>&nbsp;</th>
+                    <th>ID</th>
+                    <th>FIRST NAME</th>
+                    <th>LAST NAME</th>
+                    <th>EMAIL</th>
+                </thead>
+                <tbody id="users">
+
+                </tbody>
+            </table>
+          
+        </main-->
         <script src="bundle.js"/>
     </body>
 </html>
