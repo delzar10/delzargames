@@ -6,6 +6,10 @@ html {
     font-family: "Lucida Sans", sans-serif;
 }
 
+body{
+    margin:0 auto;
+}
+
 .row::after {
     content: "";
     clear: both;
