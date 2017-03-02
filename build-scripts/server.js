@@ -6,12 +6,12 @@ import config from '../webpack.config.dev';
 
 /* eslint-disable no-console */
 
-const port = 8080;
+const port = 9000;
 const app = express();
 const compiler = webpack(config);
 
 app.use(require('webpack-dev-middleware')(compiler, {
-    
+
     noInfo: false, // No especial info
     stats: { colors: true },
     publicPath: config.output.publicPath // Public path
