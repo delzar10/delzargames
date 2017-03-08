@@ -1,5 +1,2 @@
-@import "~initialize-css/dist/_initialize";
-@import 'palette';
-@import 'variables';
-@import 'base';
-
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
