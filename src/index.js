@@ -1,9 +1,15 @@
-import './index.css';
+import 'payform';
+//import './index.css';
 //import 'materialize-css/bin/materialize.js';
 //import 'materialize-css/sass/materialize.scss';
 //import numeral from 'numeral';
-import './sass/main.scss';
+import './js/search';
+import './js/navbar';
+import './js/best-seller';
+import './js/payform-validate';
 import {getUsers} from './api/userApi';
+
+import './sass/main.scss';
 
 // Para deshabilitar la regla se pone el siguiente comentario
 /* eslint-disable no-console */

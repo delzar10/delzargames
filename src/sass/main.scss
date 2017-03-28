@@ -1,2 +1,10 @@
+$fa-font-path: "~font-awesome/fonts/";
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/";
+@import "~font-awesome/scss/font-awesome/";
+@import "card";
+@import "base";
+@import "sign";
+@import "payform";
+@import "best-seller";

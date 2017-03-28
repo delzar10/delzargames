@@ -16,7 +16,12 @@
   },
   "rules": {
     // Evita que el código en javascript produzca mensajes de consola
-    "no-console": 1 // 0 - Off // 1 - Warning // 2 - Error
+    "no-console": 1, // 0 - Off // 1 - Warning // 2 - Error
+    "no-unused-vars": 1
+  },
+  "globals": {
+    "$": true,
+    "jQuery": true
   }
 }
 
