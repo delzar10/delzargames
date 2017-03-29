@@ -2,26 +2,35 @@ import express from 'express';
 import path from 'path';
 import open from 'open';
 import webpack from 'webpack';
+import bodyParser from 'body-parser';
 import config from '../webpack.config.dev';
-import mongo from 'mongodb'
 import bookRouter from '../routes/bookRoutes';
 import adminRouter from '../routes/adminRoutes';
+import mongoose from './connectDB';
+import passport from 'passport';
+import session from 'express-session';
+import cookieParser from 'cookie-parser';
+
+import {User} from '../model/User';
+import {Game} from '../model/Game';
 
 
 /* eslint-disable no-console */
-
 const port = 9000;
 const app = express();
 const compiler = webpack(config);
 const router = express.Router();
-const mongoClient = mongo.MongoClient;
+const mongoClient = mongoose.MongoClient;
 
-// Engine view EJS
-app.set('views', './src');
-app.set('view engine', 'ejs');
-
-app.use('/Books', bookRouter);
-app.use('/Admin', adminRouter);
+var nav = [
+    {
+      Link: '/Books',
+      Text: 'Book'
+    },
+    {
+      Link: '/Authors',
+      Text: 'Author'
+    }]
 
 // a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
 app.use(require('webpack-dev-middleware')(compiler, {
@@ -31,6 +40,20 @@ app.use(require('webpack-dev-middleware')(compiler, {
     publicPath: config.output.publicPath // Public path
 }));
 
+// Engine view EJS
+app.use(express.static('public'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
+app.use(cookieParser());
+app.use(session({secret: 'library'}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.set('views', './src');
+app.set('view engine', 'ejs');
+
+app.use('/Books', bookRouter);
+app.use('/Admin', adminRouter);
 
 // a middleware function with no mount path. This code is executed for every request to the router
 router.use(function (req, res, next) {
@@ -72,8 +95,6 @@ router.get('/user/:id', function (req, res, next) {
 // mount the router on the app
 app.use('/', router);
 
-
-
 app.use(function (req, res, next) {
     console.log(req.originalUrl)
     console.log(req.method)
@@ -91,8 +112,32 @@ app.use(function (req, res, next) {
 
 
 app.get('/', function(req, res){
+    /*
+    var newGame = new Game
+    ({ 
+        title: 'Silence', 
+        platform: 'XBOX-ONE',
+        price: 10
+    });
+
+    newGame.save(function (err, fluffy) {
+      if (err) return console.error(err);
+    });
+*/
+    Game.find(function (err, games) {
+      if (err) return console.error(err);
+      console.log(games);
+      //res.render('../src/index.ejs', {games: games});
+    });
+
     console.log('TERMINAR')
-    res.render('../src/index.ejs');
+    //res.render('../src/index.ejs');
+    res.sendFile(path.join(__dirname, '../src/index.html'));
+});
+
+app.get('/game', function(req, res){
+    console.log('TERMINAR')
+    res.render('../src/game-detail.ejs');
     //res.sendFile(path.join(__dirname, '../src/index.ejs'));
 });
 

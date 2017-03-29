@@ -1,13 +1,10 @@
 import express from 'express';
+var router = express.Router();
 
-var adminRouter = express.Router();
+router.route('/Books');
 
-var router = function(nav) {
-    adminRouter.route('/addBooks').get(function (req, res) {
-        res.send('inserting books');
-    });
-
-    return adminRouter;
-}
+router.get('/addBooks', function(req, res, next) {
+    res.send('inserting books');
+});
 
 module.exports = router;

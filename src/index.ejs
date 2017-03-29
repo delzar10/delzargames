@@ -1,6 +1,12 @@
 <html>
 
   <head>
+    <% if (htmlWebpackPlugin.options.trackJSToken) { %>
+    <!-- BEGIN TRACKJS -->
+    <script type="text/javascript">window._trackJs = { token: '<%=htmlWebpackPlugin.options.trackJSToken%>' };</script>
+    <script type="text/javascript" src="https://cdn.trackjs.com/releases/current/tracker.js"></script>
+    <!-- END TRACKJS -->
+    <% } %>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!--Import Google Icon Font-->
@@ -17,7 +23,7 @@
   <%- include best-seller %>
     <%# include('./header') %>
 
-  <%- include gallery %>
+  <%- include('game-gallery', {games: games}) %>
 
 
 

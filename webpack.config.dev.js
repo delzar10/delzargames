@@ -15,16 +15,16 @@ export default {
     publicPath: '/', // Simula los archivos
     filename: 'bundle.js' // Simula los archivos
   },
-  plugins: [ new ExtractTextPlugin(
-     "styles.css"
-    //allChunks: true
-   )]
-
-   /*new webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery"
-        })
-  */, //catching error, hot reloading, linting
+  /*resolve: {
+    alias: {
+      jquery: "~jquery/"
+    }
+  }*/
+  plugins: [ 
+   new HtmlWebpackPlugin({template: 'src/index.html', inject: true}),
+   new ExtractTextPlugin("styles.css"//allChunks: true
+   )],
+   //catching error, hot reloading, linting
   module: { // file types wanna to handle
     loaders: [
       {test: /\.js$/, loaders: ['babel']},
