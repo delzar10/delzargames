@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 function openNav() {
     document.getElementById("mySidenav").style.width = "70%";
     // document.getElementById("flipkart-navbar").style.width = "50%";

@@ -10,4 +10,5 @@ router.get('/addBooks', function(req, res, next) {
     res.send('inserting books');
 });
 
+export default {};
 module.exports = router;

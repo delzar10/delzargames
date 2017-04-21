@@ -19,7 +19,7 @@
 
 
     <div class="omb_login">
-        <h3 class="omb_authTitle">Login or <a href="#">Sign up</a></h3>
+        <h3 class="omb_authTitle"><a href="#">Sign up with</a></h3>
         <div class="row omb_row-sm-offset-3 omb_socialButtons">
             <div class="col-xs-4 col-sm-2">
                 <a href="#" class="btn btn-lg btn-block omb_btn-facebook">
@@ -61,9 +61,38 @@
                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                         <input  type="password" class="form-control" name="password" placeholder="Password">
                     </div>
-                    <span class="help-block">Password error</span>
 
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+                    <span class="help-block"></span>
+                    
+                    <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <input size="60" maxlength="255" class="form-control" placeholder="First Name" name="firstName" id="UserRegistration_fname" type="text">                                    
+                    </div>
+
+                    <span class="help-block"></span>
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input size="60" maxlength="255" class="form-control" placeholder="Last Name" name="lastName" id="UserRegistration_lname" type="text">                                    
+                    </div>
+
+                    <span class="help-block"></span>
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon fa fa-envelope "></i></span>
+                        <input size="60" maxlength="255" class="form-control" placeholder="Address" name="email" id="UserRegistration_address" type="text">                                    
+                     </div>
+
+                     <span class="help-block"></span>
+
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon fa fa-mobile"></i></span>
+                        <input size="60" maxlength="255" class="form-control" placeholder="Contact Number" name="number" id="UserRegistration_contactnumber" type="text">                                    
+                     </div>
+
+                    <span class="help-block"></span>
+
+                    <button class="btn btn-lg btn-primary btn-block" type="button" onclick="setAllError(); ">Sign Up</button>
                 </form>
             </div>
         </div>

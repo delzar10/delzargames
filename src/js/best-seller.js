@@ -1,3 +1,4 @@
+
 $(document).ready(function(ev){
     $('#custom_carousel').on('slide.bs.carousel', function (evt) {
       $('#custom_carousel .controls li.active').removeClass('active');

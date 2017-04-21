@@ -2,26 +2,43 @@ import express from 'express';
 import path from 'path';
 import open from 'open';
 import compression from 'compression';
+import passport from 'passport';
+import bodyParser from 'body-parser';
+import session from 'express-session';
+import cookieParser from 'cookie-parser';
+import rootRouter from '../routes/rootRoutes';
+import bookRouter from '../routes/bookRoutes';
+import consoleRouter from '../routes/consoleRoutes';
+import mongoose from 'mongoose';
+
+//let url = "mongodb://delzar:DELzar_10@ds137110.mlab.com:37110/delzar-games";
+mongoose.connect('mongodb://localhost/mydb');
+//mongoose.connect(url);
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log("Console Log Access Correct");
+});
 
 const port = 8080;
 const app = express();
 
 app.use(compression());
 app.use(express.static('dist'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
+app.use(cookieParser());
+app.use(session({secret: 'library'}));
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.get('/', function(req, res){
-    res.sendFile(path.join(__dirname, '../dist/index.html'));
-});
+app.set('views', './src');
+app.set('view engine', 'ejs');
 
-app.get('/users', function(req, res){
-    res.json([
-        {"id": 1, "firstName":"Bob","lastName":"Smith", "email":"bob@gmail.com"},
-        {"id": 2, "firstName":"Tammy","lastName":"Glendal", "email":"tammy@gmail.com"},
-        {"id": 3, "firstName":"Tina","lastName":"Jenner", "email":"tina@gmail.com"}
-    ]);
-
-    //res.sendFile(path.join(__dirname, '../src/index.html'));
-});
+app.use('/', rootRouter);
+app.use('/Books', bookRouter);
+app.use('/Console', consoleRouter);
 
 // Excepciones a la regla de no console en este archivo:
 /* eslint-disable no-console */

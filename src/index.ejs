@@ -1,12 +1,7 @@
+<!DOCTYPE html>
 <html>
 
   <head>
-    <% if (htmlWebpackPlugin.options.trackJSToken) { %>
-    <!-- BEGIN TRACKJS -->
-    <script type="text/javascript">window._trackJs = { token: '<%=htmlWebpackPlugin.options.trackJSToken%>' };</script>
-    <script type="text/javascript" src="https://cdn.trackjs.com/releases/current/tracker.js"></script>
-    <!-- END TRACKJS -->
-    <% } %>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!--Import Google Icon Font-->
@@ -16,35 +11,36 @@
         <!--Let browser know website is optimized for mobile-->
     </head>
   </head>
-
   <body>
-  <%- include header %>
-  <%- include navbar %>
-  <%- include best-seller %>
-    <%# include('./header') %>
 
-  <%- include('game-gallery', {games: games}) %>
+    <%#=games%>
+
+    <%# for (var css in htmlWebpackPlugin.files.css) { %>
+        <%#=htmlWebpackPlugin.files.css[css] %>
+    <%# } %>
+
+   <!-- si utiliza ejs-compiled-loader es necesario utilizar src/pathToFile -->
+   <%#- include src/header %> 
+   <%- include header %>
+
+   <!-- si utiliza ejs-compiled-loader es necesario utilizar src/pathToFile -->
+   <%#- include src/navbar %>
+   <%- include navbar %>
+
+   <!-- si utiliza ejs-compiled-loader es necesario utilizar src/pathToFile -->
+   <%#- include src/best-seller %>
+   <%- include best-seller %>
 
 
+   <%# include('./header') #%>
+   <%#- include('user/show', {user: user}) %>
+   <%- include('game-gallery', {games: games}) %>
+   <%- include footer #%>
 
-   <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-3">
-             <%- include('card', {title: "Registrar", subtitle: "Registrate para tener mas promociones"}) %>
-          </div>
-          <div class="col-sm-3">
-             <%- include('card', {title: "Ofertas", subtitle: "Ve directamente a las ofertas Actuales"}) %>
-          </div>
-           <div class="col-sm-3">
-             <%- include('card', {title: "Facturas", subtitle: "Necesitas facturar tus compras"}) %>
-          </div>
-        </div>
-      </div>
+    <div id="users">
     </div>
 
-    <%- include footer %>
-
-    <script src="bundle.js"/>
+  <script src="bundle.js"/>
+  <script src="vendor.js"/>
   </body>
 </html>

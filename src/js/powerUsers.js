@@ -1,3 +1,6 @@
+    /*
+    import mongoose from 'mongoose';
+    
     var PUser = mongoose.model('PowerUsers', userSchema);
 
     // Creating one user.
@@ -8,3 +11,4 @@
 
     // Saving it to the database.
     johndoe.save(function (err) {if (err) console.log ('Error on save!')});
+*/

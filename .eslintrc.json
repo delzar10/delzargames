@@ -16,8 +16,9 @@
   },
   "rules": {
     // Evita que el código en javascript produzca mensajes de consola
-    "no-console": 1, // 0 - Off // 1 - Warning // 2 - Error
-    "no-unused-vars": 1
+    "no-console": 0, // 0 - Off // 1 - Warning // 2 - Error
+    "no-unused-vars": 0,
+    "no-debugger": 0
   },
   "globals": {
     "$": true,

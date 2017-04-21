@@ -4,6 +4,7 @@ import fs from 'fs';
 
 /* eslint-disable no-console */
 
+/*
 describe('Our first test', () => {
     it('should pass', () => {
         expect(true).to.equal(true);
@@ -26,3 +27,4 @@ describe("index.html", () => {
         })//callback
     })
 })
+*/
