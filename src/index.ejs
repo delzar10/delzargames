@@ -7,13 +7,14 @@
         <!--Import Google Icon Font-->
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="styles.css"/>
+        <!--link type="text/css" rel="stylesheet" href="styles.css"/-->
         <!--Let browser know website is optimized for mobile-->
     </head>
   </head>
   <body>
 
-    <%#=games%>
+
+    <%#= games %>
 
     <%# for (var css in htmlWebpackPlugin.files.css) { %>
         <%#=htmlWebpackPlugin.files.css[css] %>
@@ -21,26 +22,29 @@
 
    <!-- si utiliza ejs-compiled-loader es necesario utilizar src/pathToFile -->
    <%#- include src/header %> 
-   <%- include header %>
+   <%- include ../src/header %>
 
    <!-- si utiliza ejs-compiled-loader es necesario utilizar src/pathToFile -->
    <%#- include src/navbar %>
-   <%- include navbar %>
+   <%- include ../src/navbar %>
 
    <!-- si utiliza ejs-compiled-loader es necesario utilizar src/pathToFile -->
    <%#- include src/best-seller %>
-   <%- include best-seller %>
+   <%- include ../src/best-seller %>
 
 
    <%# include('./header') #%>
-   <%#- include('user/show', {user: user}) %>
-   <%- include('game-gallery', {games: games}) %>
-   <%- include footer #%>
+
+   <%- include('../src/game-gallery', {games: games}) %>
+
+   <%#- include footer #%>
+   <%- include ../src/footer %>
+   
 
     <div id="users">
     </div>
 
-  <script src="bundle.js"/>
-  <script src="vendor.js"/>
+  <!--script src="bundle.js"/-->
+  <!--script src="vendor.js"/-->
   </body>
 </html>

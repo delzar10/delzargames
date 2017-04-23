@@ -1,3 +1,4 @@
+const ejs = require("ejs").__express;
 import express from 'express';
 import path from 'path';
 import open from 'open';
@@ -35,6 +36,7 @@ app.use(passport.session());
 
 app.set('views', './src');
 app.set('view engine', 'ejs');
+app.engine('.ejs', ejs);// <-- this does the trick
 
 app.use('/', rootRouter);
 app.use('/Books', bookRouter);

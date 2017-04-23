@@ -29,7 +29,7 @@ router.get('/', function(req, res){
      Game.find(function (err, games) {
       if (err) return console.error(err)
       //res.render('../dist/index.html');
-      res.render('../src/index.ejs', {games: games});
+      res.render('../dist/index.html', {games: games});
     });
 });
 
@@ -40,7 +40,7 @@ router.get('/index', function(req, res){
     res.setHeader('X-Foo', 'bar');
     res.writeHead(200, {'Content-Type': 'text/plain'});
     res.end('ok');
-*/   
+
     var newGame = new Game
     ({ 
         title: 'Silence', 
@@ -52,10 +52,10 @@ router.get('/index', function(req, res){
       if (err) return console.error(err);
     });
 
-
+*/   
     Game.find(function (err, games) {
       if (err) return console.error(err);
-      return res.render('../src/index.ejs', {games: games});
+      return res.render('../dist/index.html', {games: games});
     });
 
     console.log('TERMINAR')

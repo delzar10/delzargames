@@ -63,7 +63,7 @@ export default {
       filename: 'sign-up.html', template: 'src/sign-up.ejs', // Load a custom template (ejs by default see the FAQ for details)
     }),*/
     new HtmlWebpackPlugin({
-      filename: 'index.ejs',
+      filename: 'index.html',
       template: 'src/index.ejs',  // ejs-loader default loader
       compile: true,
       inject: true,
@@ -73,8 +73,8 @@ export default {
       showErrors: true,
       chunks: 'all',
       excludeChunks: [],
-      trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3', //TrackJSTOKEN ON PRODUCTION ONLY
-      minify: {
+      trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
+      /*minify: {
         removeComments: true,
         collapseWhitespace: true,
         removeRedundantAttributes: true,
@@ -85,7 +85,7 @@ export default {
         minifyJS: true,
         minifyCSS: true,
         minifyURLs: true
-      }
+      }*/
     }),
     new WebpackMd5Hash(), // Cache Busting solo descarga cuando haya cambios
     new webpack.optimize.DedupePlugin(), // Elimina Duplicados
@@ -94,17 +94,38 @@ export default {
   ],
   module: { // file types wanna to handle
     loaders: [
-       {
+      {
+        test: /\.(html|ejs)$/,
+        loader: 'html-loader',
+        options: {
+          minimize: true,
+          removeComments: true,
+          collapseWhitespace: true,
+          removeRedundantAttributes: true,
+          useShortDoctype: true,
+          removeEmptyAttributes: true,
+          removeStyleLinkTypeAttributes: true,
+          keepClosingSlash: true,
+          minifyJS: true,
+          minifyCSS: true,
+          minifyURLs: true
+        }
+      },
+     /*{
         test: /\.ejs$/,
         //loader: 'ejs-loader' // default
-        loader: 'ejs-compiled-loader'
-      },
+        //loader: 'ejs-simple-loader' // si no se pone loader en la version 1 de webpack la pone sola
+        //loader: 'ejs-compiled-loader'
+        loader: 'ejs-render-loader?raw=true'
+        //loader: 'ejs-html-loader'
+        
+      },*/
       {test: /\.js$/, loaders: ['babel'], exclude: /node_modules/},
      // {test: /\.css$/, loader: ExtractTextPlugin.extract("css?sourceMap")}, //!autoprefixer-loader
      // {test: /\.scss$/, loader: ExtractTextPlugin.extract("css?sourceMap?!sass?sourceMap")},
      {
         test: /\.(css|scss|sass)$/,  // style-loader! inject it to style tag style-loader
-        loader: ExtractTextPlugin.extract("css-loader?sourceMap?!postcss-loader!sass-loader?sourceMap")
+        loader: ExtractTextPlugin.extract("css-loader?sourceMap?!sass-loader?sourceMap")
       },
       {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader?mimetype=image/svg+xml'},
       {test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader?mimetype=application/font-woff"},
