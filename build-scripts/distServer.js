@@ -13,7 +13,7 @@ import consoleRouter from '../routes/consoleRoutes';
 import mongoose from 'mongoose';
 
 //mongoose.connect('mongodb://localhost/mydb');
-mongoose.connect(PROD_MONGODB);
+mongoose.connect(process.env.PROD_MONGODB);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

@@ -14,7 +14,7 @@ import mongoose from 'mongoose';
 
 //let url = "mongodb://localhost/mydb";
 //mongoose.connect(url);
-mongoose.connect(PROD_MONGODB);
+mongoose.connect(process.env.PROD_MONGODB);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
