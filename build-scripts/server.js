@@ -24,22 +24,13 @@ db.once('open', function() {
 
 
 /* eslint-disable no-console */
-app.set('port', (process.env.PORT || 5000));
 //const port = 9000;
 const app = express();
 const compiler = webpack(config);
 const router = express.Router();
 const mongoClient = mongoose.MongoClient;
 
-var nav = [
-    {
-      Link: '/Books',
-      Text: 'Book'
-    },
-    {
-      Link: '/Authors',
-      Text: 'Author'
-    }]
+app.set('port', (process.env.PORT || 5000));
 
 // a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
 app.use(require('webpack-dev-middleware')(compiler, {
