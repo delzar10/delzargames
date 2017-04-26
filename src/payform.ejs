@@ -1,0 +1,95 @@
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--Import Google Icon Font-->
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="styles.css"/>
+        <!--Let browser know website is optimized for mobile-->
+    </head>
+  </head>
+
+  <body>
+
+    <%- include header %>
+
+<div class="container">
+	<div class="row">
+            <h2>FORMAS DE PAGO</h2>
+
+            <div class="std"><div class="cms-page"><h2>Formas de pago en sucursales</h2><p>Los medios de pago que aceptamos en nuestras tiendas son:</p><ul><li>Pago en Efectivo (solo aceptamos moneda nacional)</li><li>Pago con tarjeta de débito/crédito (VISA, MasterCard, American Express)</li></ul><p>No aceptamos como medio de pago:</p><ul><li>Vales de despensa</li><li>Vales del gobierno</li><li>Vales de gasolina</li><li>Tarjetas de beneficios y/o descuentos</li><li>Cheques</li><li>Transferencias Interbancarias</li><li>Depósitos en Ventanilla</li><li>Pago en monedas extranjeras (solo aceptamos pago en pesos mexicanos)</li></ul><h2>Formas de pago para tienda en línea</h2><p>Los medios de pago que aceptamos en nuestra tienda en línea son:</p><ul><li>Tarjeta de crédito/débito por medio de PayPal</li></ul><h2>Promociones</h2><p>Mantente al pendiente de nuestro sitio web y redes sociales para promociones de Meses sin Intereses y otros beneficios.</p></div></div>
+
+        </div>
+    </div>
+
+        <%- include footer %>
+
+    <script>
+        $(function() {
+
+            var owner = $('#owner');
+            var cardNumber = $('#cardNumber');
+            var cardNumberField = $('#card-number-field');
+            var CVV = $("#cvv");
+            var mastercard = $("#mastercard");
+            var confirmButton = $('#confirm-purchase');
+            var visa = $("#visa");
+            var amex = $("#amex");
+
+            // Use the payform library to format and validate
+            // the payment fields.
+
+            cardNumber.payform('formatCardNumber');
+            CVV.payform('formatCardCVC');
+
+
+            cardNumber.keyup(function() {
+
+                amex.removeClass('transparent');
+                visa.removeClass('transparent');
+                mastercard.removeClass('transparent');
+
+                if ($.payform.validateCardNumber(cardNumber.val()) == false) {
+                    cardNumberField.addClass('has-error');
+                } else {
+                    cardNumberField.removeClass('has-error');
+                    cardNumberField.addClass('has-success');
+                }
+
+                if ($.payform.parseCardType(cardNumber.val()) == 'visa') {
+                    mastercard.addClass('transparent');
+                    amex.addClass('transparent');
+                } else if ($.payform.parseCardType(cardNumber.val()) == 'amex') {
+                    mastercard.addClass('transparent');
+                    visa.addClass('transparent');
+                } else if ($.payform.parseCardType(cardNumber.val()) == 'mastercard') {
+                    amex.addClass('transparent');
+                    visa.addClass('transparent');
+                }
+            });
+
+            confirmButton.click(function(e) {
+
+                e.preventDefault();
+
+                var isCardValid = $.payform.validateCardNumber(cardNumber.val());
+                var isCvvValid = $.payform.validateCardCVC(CVV.val());
+
+                if(owner.val().length < 5){
+                    alert("Wrong owner name");
+                } else if (!isCardValid) {
+                    alert("Wrong card number");
+                } else if (!isCvvValid) {
+                    alert("Wrong CVV");
+                } else {
+                    // Everything is correct. Add your form submission code here.
+                    alert("Everything is correct");
+                }
+            });
+        });
+    </script>
+    <script src="bundle.js"/>
+  </body>
+</html>

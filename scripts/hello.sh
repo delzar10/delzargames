@@ -1,0 +1,1 @@
+if [ $BUILD_ASSETS ]; then npm run build-assets; fi

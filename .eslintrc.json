@@ -1,0 +1,32 @@
+{
+  "root": true, //This is the only ESLINT File applying to our project
+  "extends": [
+    "eslint:recommended", // Recommended eslint
+    "plugin:import/errors", // Plugins for errors
+    "plugin:import/warnings" // Plungis for warnings
+  ],
+  "parserOptions": {
+    "ecmaVersion": 7, // ES2016
+    "sourceType": "module" //MODULOS
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    // Evita que el código en javascript produzca mensajes de consola
+    "no-console": 0, // 0 - Off // 1 - Warning // 2 - Error
+    "no-unused-vars": 0,
+    "no-debugger": 0
+  },
+  "globals": {
+    "$": true,
+    "jQuery": true
+  }
+}
+
+// Le pasa la bandera de --watch a eslint watch // Mira el codigo JS cada que cambia
+// ESLINT WATCH EVERYTHING IN src AND build-scripts
+// Disable editor linting rules because it overrides eslint's
+// Si se tiene un archivo .eslintrc en la carpeta de usuario borrarlo
