@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 
 //mongoose.connect('mongodb://localhost/mydb');
-mongoose.connect(url);
+mongoose.connect(PROD_MONGODB);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
