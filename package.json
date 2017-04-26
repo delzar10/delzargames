@@ -16,7 +16,7 @@
     "comment-heroku-postbuild": "echo This runs afterwards.",
     "comment-postinstall": "npm install",
     "prestart": "./node_modules/.bin/babel-node build-scripts/start-message.js",
-    "start": "NODE_ENV=development npm-run-all --parallel security-check start-server lint:watch start-mockapi",
+    "start": "NODE_ENV=development npm-run-all --parallel start-server lint:watch start-mockapi",
     "comment-start": "NODE_ENV=development npm-run-all --parallel security-check start-server lint:watch start-mockapi",
     "prestart-offline": "./node_modules/.bin/babel-node build-scripts/start-message.js",
     "start-offline": "npm-run-all --parallel start-server lint:watch",
