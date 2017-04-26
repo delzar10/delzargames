@@ -98,7 +98,7 @@ app.listen(app.get('port'), function(err){
     if (err){
         console.log(err);
     } else {
-        open('http://localhost:' + port);
+        console.log("delzar-games is running...");
     }
 });
 
