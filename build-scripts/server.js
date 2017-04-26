@@ -24,7 +24,8 @@ db.once('open', function() {
 
 
 /* eslint-disable no-console */
-const port = 9000;
+app.set('port', (process.env.PORT || 5000));
+//const port = 9000;
 const app = express();
 const compiler = webpack(config);
 const router = express.Router();
@@ -102,7 +103,7 @@ app.get('/myLogger', function (req, res) {
 // Excepciones a la regla de no console en este archivo:
 /* eslint-disable-line no-console */
 
-app.listen(port, function(err){
+app.listen(app.get('port'), function(err){
     if (err){
         console.log(err);
     } else {
