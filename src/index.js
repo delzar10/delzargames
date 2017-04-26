@@ -22,14 +22,14 @@ window.jQuery = jQuery;
 //import 'materialize-css/sass/materialize.scss';
 import numeral from 'numeral';
 
-import './js/search';
+/*import './js/search';
 import './js/navbar';
 import './js/best-seller';
 import './js/payform-validate';
+import './js/validation';*/
 
 import {getUsers} from './api/userApi';
 
-//mport './js/validation';
 import './sass/main.scss';
 
 // Para deshabilitar la regla se pone el siguiente comentario

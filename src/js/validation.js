@@ -5,7 +5,7 @@ function validateEmail(input) {
     required(input);
     var email = input.value;
     if (!email.test("/(.+)@(.+){2,}\.(.+){2,}/")) {
-        setError(input, 'Email incorrector');
+        setError(input, 'Email incorrecto');
         return false;
     }  
 }

@@ -16,7 +16,8 @@ export default {
   output: {
     path: path.resolve(__dirname, 'src'), //Create something in memory y se lo pasa al navegador
     publicPath: '/', // Simula los archivos
-    filename: '[name].js' // Simula los archivos
+    //filename: '[name].js' // Simula los archivos
+    filename: 'bundle.js' // Simula los archivos
   },
   /*resolve: {
     alias: {

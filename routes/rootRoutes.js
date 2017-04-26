@@ -29,7 +29,7 @@ router.get('/', function(req, res){
      Game.find(function (err, games) {
       if (err) return console.error(err)
       //res.render('../dist/index.html');
-      res.render('../dist/index.html', {games: games});
+      res.render('../src/index.ejs', {games: games});
     });
 });
 
@@ -55,7 +55,7 @@ router.get('/index', function(req, res){
 */   
     Game.find(function (err, games) {
       if (err) return console.error(err);
-      return res.render('../dist/index.html', {games: games});
+      return res.render('../src/index.ejs', {games: games});
     });
 
     console.log('TERMINAR')
