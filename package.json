@@ -7,6 +7,9 @@
     "ie > 9"
   ],
   "scripts": {
+    "heroku-prebuild": "echo This runs before Heroku installs your dependencies.",
+    "heroku-postbuild": "echo This runs afterwards.",
+    "postinstall": "npm install",
     "prestart": "./node_modules/.bin/babel-node build-scripts/start-message.js",
     "start": "NODE_ENV=development npm-run-all --parallel security-check start-server lint:watch start-mockapi",
     "prestart-offline": "./node_modules/.bin/babel-node build-scripts/start-message.js",
