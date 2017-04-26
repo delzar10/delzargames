@@ -2,6 +2,10 @@
   "name": "javascript-development-environment",
   "version": "1.0.0",
   "description": "Delzar Games",
+  "engines": {
+    "node": "4.4.7",
+    "npm": "3.10.10"
+  },
   "browserslist": [
     "> 1%",
     "ie > 9"
@@ -106,5 +110,10 @@
     "webpack-hot-middleware": "2.13.0",
     "webpack-md5-hash": "0.0.5",
     "whatwg-fetch": "1.0.0"
-  }
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ] 
 }
