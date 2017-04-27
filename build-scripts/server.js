@@ -12,9 +12,9 @@ import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 
-//let url = "mongodb://localhost/mydb";
-//mongoose.connect(url);
-mongoose.connect(process.env.PROD_MONGODB);
+let url = "mongodb://delzar:DELzar_10@ds137110.mlab.com:37110/delzar-games";
+// "mongodb://localhost/mydb"
+mongoose.connect((process.env.PROD_MONGODB || url));
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -24,13 +24,13 @@ db.once('open', function() {
 
 
 /* eslint-disable no-console */
-//const port = 9000;
+const port = (process.env.PORT || 8080);
 const app = express();
 const compiler = webpack(config);
 const router = express.Router();
 const mongoClient = mongoose.MongoClient;
 
-app.set('port', (process.env.PORT || 5000));
+app.set('port', (process.env.PORT || 8080));
 
 // a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
 app.use(require('webpack-dev-middleware')(compiler, {

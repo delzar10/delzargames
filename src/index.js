@@ -45,7 +45,7 @@ global.courseValue = courseValue;
 //global.document.courseValue = courseValue;
 //window.courseValue = courseValue;
 
-
+/*
 global.users = getUsers(); 
 
 getUsers().then( result => {
@@ -64,3 +64,4 @@ getUsers().then( result => {
 
     global.document.getElementById('users').innerHTML = usersBody;
 });
+*/

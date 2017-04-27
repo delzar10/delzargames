@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
 
 
-//mongoose.connect('mongodb://localhost/mydb');
-mongoose.connect(process.env.PROD_MONGODB);
+mongoose.connect(process.env.PROD_MONGODB || "mongodb://localhost/mydb");
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

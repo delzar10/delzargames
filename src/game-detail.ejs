@@ -8,48 +8,41 @@
         <!--Import materialize.css-->
         <link type="text/css" rel="stylesheet" href="styles.css"/>
         <!--Let browser know website is optimized for mobile-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
   </head>
 
   <body>
   <%- include header %>
-  <%- include navbar %>
     <%# include('./header') %>
 
- <div class="section">
-      <div class="container">
+      <div class="container padding-top-10">
         <div class="row">
           <div class="col-sm-6">
-            <img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png"
-            class="img-responsive">
+            <img src="https://media.redadn.es/imagenes/call-of-duty-black-ops-3_260233.jpg" class="img-responsive">
           </div>
-          <div class="col-xs-5" style="border:0px solid gray">
+          <div class="col-sm-6" style="border:0px solid gray">
                     <!-- Datos del vendedor y titulo del producto -->
                     <h3>GameName</h3>    
-                    <h5 style="color:#337ab7"><a href="#">GameDeveloper</a> · <small style="color:#337ab7">selled</small></h5>
+                    <h5 style="color:#337ab7"><a href="#">MICROSOFT</a> · <small style="color:#337ab7">selled</small></h5>
 
                     <!-- Precios -->
                     <h6 class="title-price"><small>PRECIO OFERTA</small></h6>
                     <h3 style="margin-top:0px;">U$S 399</h3>
 
                     <!-- Detalles especificos del producto -->
-                    <div class="section">
-                        <h6 class="title-attr" style="margin-top:15px;" ><small>COLOR</small></h6>                    
-                        <div>
-                            <div class="attr" style="width:25px;background:#5a5a5a;"></div>
-                            <div class="attr" style="width:25px;background:white;"></div>
-                        </div>
-                    </div>
                     <div class="section" style="padding-bottom:5px;">
                         <h6 class="title-attr"><small>CAPACIDAD</small></h6>                    
-                        <div>
-                            <div class="attr2">Clasification</div>
-                            <div class="attr2">Clasification</div>
+                        <div class="width100 flex">
+                            <div class="attr2 ">Adulto</div>
+                            <div class="attr2">Guerras</div>
                         </div>
                     </div>   
                     <div class="section" style="padding-bottom:20px;">
                         <h6 class="title-attr"><small>CANTIDAD</small></h6>                    
-                        <div>
+                        <div class="width100 flex">
                             <div class="btn-minus"><span class="glyphicon glyphicon-minus"></span></div>
                             <input value="1" />
                             <div class="btn-plus"><span class="glyphicon glyphicon-plus"></span></div>
@@ -58,12 +51,12 @@
 
                     <!-- Botones de compra -->
                     <div class="section" style="padding-bottom:20px;">
-                        <button class="btn btn-success"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Agregar al carro</button>
-                        <h6><a href="#"><span class="glyphicon glyphicon-heart-empty" style="cursor:pointer;"></span> Agregar a lista de deseos</a></h6>
+                        <button class="btn btn-success" onclick="document.getElementById('selected-items')"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Agregar al carro</button>
+                        <!--h6><a href="#"><span class="glyphicon glyphicon-heart-empty" style="cursor:pointer;"></span> Agregar a lista de deseos</a></h6-->
                     </div>                                        
                 </div>                              
 
-                <div class="col-xs-9">
+                <div class="col-sm-6">
                     <ul class="menu-items">
                         <li class="active">Detalle del producto</li>
                         <li>Garantía</li>
@@ -85,8 +78,42 @@
                 </div>		
         </div>
       </div>
-    </div>
 
+    <script> 
+     $(document).ready(function(){
+            //-- Click on detail
+            $("ul.menu-items > li").on("click",function(){
+                $("ul.menu-items > li").removeClass("active");
+                $(this).addClass("active");
+            })
+
+            $(".attr,.attr2").on("click",function(){
+                var clase = $(this).attr("class");
+
+                $("." + clase).removeClass("active");
+                $(this).addClass("active");
+            })
+
+            //-- Click on QUANTITY
+            $(".btn-minus").on("click",function(){
+                var now = $(".section > div > input").val();
+                if ($.isNumeric(now)){
+                    if (parseInt(now) -1 > 0){ now--;}
+                    $(".section > div > input").val(now);
+                }else{
+                    $(".section > div > input").val("1");
+                }
+            })            
+            $(".btn-plus").on("click",function(){
+                var now = $(".section > div > input").val();
+                if ($.isNumeric(now)){
+                    $(".section > div > input").val(parseInt(now)+1);
+                }else{
+                    $(".section > div > input").val("1");
+                }
+            })                        
+        }) 
+    </script>
     <%- include footer %>
 
     <script src="bundle.js"/>

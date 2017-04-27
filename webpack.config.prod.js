@@ -35,9 +35,6 @@ export default {
       filename: 'card.html', template: 'src/card.ejs', // Load a custom template (ejs by default see the FAQ for details)
     }),
     new HtmlWebpackPlugin({
-      filename: 'console-gallery.html', template: 'src/console-gallery.ejs', // Load a custom template (ejs by default see the FAQ for details)
-    }),
-    new HtmlWebpackPlugin({
       filename: 'faqs.html', template: 'src/faqs.ejs', // Load a custom template (ejs by default see the FAQ for details)
     }),
 
@@ -62,8 +59,22 @@ export default {
     new HtmlWebpackPlugin({
       filename: 'sign-up.html', template: 'src/sign-up.ejs', // Load a custom template (ejs by default see the FAQ for details)
     }),*/
+
     new HtmlWebpackPlugin({
-      filename: 'index.html',
+      filename: 'console-gallery.ejs', 
+      template: 'src/console-gallery.ejs', // Load a custom template (ejs by default see the FAQ for details)
+      compile: true,
+      inject: true,
+      cache: true,
+      title: 'Webpack App',
+      xhtml: false,
+      showErrors: true,
+      chunks: 'all',
+      excludeChunks: [],
+      trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
+   }),
+    new HtmlWebpackPlugin({
+      filename: 'index.ejs',
       template: 'src/index.ejs',  // ejs-loader default loader
       compile: true,
       inject: true,

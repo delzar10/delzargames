@@ -64,41 +64,39 @@ router.get('/index', function(req, res){
 });
 
 router.get('/game', function(req, res){
-    console.log('TERMINAR')
     res.render('../src/game-detail.ejs');
     //res.sendFile(path.join(__dirname, '../src/index.ejs'));
 });
 
 router.get('/faqs', function(req, res){
-    console.log('TERMINAR')
     res.render('../src/faqs.ejs');
     //res.sendFile(path.join(__dirname, '../src/index.ejs'));
 });
 
 router.get('/payform', function(req, res){
-    console.log('TERMINAR')
     res.render('../src/payform.ejs');
     //res.sendFile(path.join(__dirname, '../src/index.ejs'));
 });
 
 router.get('/signIn', function(req, res){
-    console.log('TERMINAR')
     res.render('../src/sign-in.ejs');
     //res.sendFile(path.join(__dirname, '../src/index.ejs'));
 });
 
 router.get('/signUp', function(req, res){
-    console.log('TERMINAR')
     res.render('../src/sign-up.ejs');
     //res.sendFile(path.join(__dirname, '../src/index.ejs'));
 });
 
 router.get('/credit', function(req, res){
-    console.log('TERMINAR')
     res.render('../src/credit-card.ejs');
     //res.sendFile(path.join(__dirname, '../src/index.ejs'));
 });
 
+router.get('/cart', function(req, res){
+    res.render('../src/cart.ejs');
+    //res.sendFile(path.join(__dirname, '../src/index.ejs'));
+});
 
 router.route('/book')
   .get(function (req, res) {

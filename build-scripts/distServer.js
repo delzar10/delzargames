@@ -1,4 +1,4 @@
-const ejs = require("ejs").__express;
+//const ejs = require("ejs").__express;
 import express from 'express';
 import path from 'path';
 import open from 'open';
@@ -12,8 +12,7 @@ import bookRouter from '../routes/bookRoutes';
 import consoleRouter from '../routes/consoleRoutes';
 import mongoose from 'mongoose';
 
-//mongoose.connect('mongodb://localhost/mydb');
-mongoose.connect(process.env.PROD_MONGODB);
+mongoose.connect((process.env.PROD_MONGODB || 'mongodb://localhost/mydb'));
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -21,7 +20,7 @@ db.once('open', function() {
   console.log("Console Log Access Correct");
 });
 
-const port = 8080;
+const port = (process.env.PORT || 8080);
 const app = express();
 
 app.use(compression());
@@ -35,7 +34,7 @@ app.use(passport.session());
 
 app.set('views', './src');
 app.set('view engine', 'ejs');
-app.engine('.ejs', ejs);// <-- this does the trick
+//app.engine('.ejs', ejs);// <-- this does the trick
 
 app.use('/', rootRouter);
 app.use('/Books', bookRouter);
@@ -48,6 +47,6 @@ app.listen(port, function(err){
     if (err){
         console.log(err);
     } else {
-        open('http://localhost:' + port);
+        console.log('Delzar Games is now running ...');
     }
 })
