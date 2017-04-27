@@ -15,7 +15,7 @@
   </head>
 
   <body>
-  <%- include header %>
+  <%- include ../src/header %>
     <%# include('./header') %>
 
       <div class="container padding-top-10">
@@ -51,7 +51,7 @@
 
                     <!-- Botones de compra -->
                     <div class="section" style="padding-bottom:20px;">
-                        <button class="btn btn-success" onclick="document.getElementById('selected-items')"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Agregar al carro</button>
+                        <button class="btn btn-success" onclick="document.getElementById('selected-items').innerHTML = '1'"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Agregar al carro</button>
                         <!--h6><a href="#"><span class="glyphicon glyphicon-heart-empty" style="cursor:pointer;"></span> Agregar a lista de deseos</a></h6-->
                     </div>                                        
                 </div>                              
@@ -114,7 +114,7 @@
             })                        
         }) 
     </script>
-    <%- include footer %>
+    <%- include ../src/footer %>
 
     <script src="bundle.js"/>
   </body>
