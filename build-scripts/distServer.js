@@ -19,8 +19,8 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log("Console Log Access Correct");
 });
-// process.env.PORT || 
-const port = (8080);
+
+const port = (process.env.PORT || 8080);
 const app = express();
 
 app.use(compression());

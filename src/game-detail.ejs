@@ -80,8 +80,6 @@
       </div>
 
     <script> 
-     $(document).ready(function(){
-            //-- Click on detail
             $("ul.menu-items > li").on("click",function(){
                 $("ul.menu-items > li").removeClass("active");
                 $(this).addClass("active");
@@ -111,8 +109,7 @@
                 }else{
                     $(".section > div > input").val("1");
                 }
-            })                        
-        }) 
+            });
     </script>
     <%- include ../src/footer %>
 
