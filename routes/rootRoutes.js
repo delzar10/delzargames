@@ -25,11 +25,11 @@ router.get('/', function(req, res){
 */
 
     console.log('TERMINAR');
-    //res.render('../src/index.ejs');
+    //res.render('../dist/index.ejs');
      Game.find(function (err, games) {
       if (err) return console.error(err)
       //res.render('../dist/index.html');
-      res.render('../src/index.ejs', {games: games});
+      res.render('../dist/index.ejs', {games: games});
     });
 });
 
@@ -55,47 +55,47 @@ router.get('/index', function(req, res){
 */   
     Game.find(function (err, games) {
       if (err) return console.error(err);
-      return res.render('../src/index.ejs', {games: games});
+      return res.render('../dist/index.ejs', {games: games});
     });
 
     console.log('TERMINAR')
-    //res.render('../src/index.ejs');
-    //res.sendFile(path.join(__dirname, '../src/index.html'));
+    //res.render('../dist/index.ejs');
+    //res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
 router.get('/game', function(req, res){
-    res.render('../src/game-detail.ejs');
-    //res.sendFile(path.join(__dirname, '../src/index.ejs'));
+    res.render('../dist/game-detail.ejs');
+    //res.sendFile(path.join(__dirname, '../dist/index.ejs'));
 });
 
 router.get('/faqs', function(req, res){
-    res.render('../src/faqs.ejs');
-    //res.sendFile(path.join(__dirname, '../src/index.ejs'));
+    res.render('../dist/faqs.ejs');
+    //res.sendFile(path.join(__dirname, '../dist/index.ejs'));
 });
 
 router.get('/payform', function(req, res){
-    res.render('../src/payform.ejs');
-    //res.sendFile(path.join(__dirname, '../src/index.ejs'));
+    res.render('../dist/payform.ejs');
+    //res.sendFile(path.join(__dirname, '../dist/index.ejs'));
 });
 
 router.get('/signIn', function(req, res){
-    res.render('../src/sign-in.ejs');
-    //res.sendFile(path.join(__dirname, '../src/index.ejs'));
+    res.render('../dist/sign-in.ejs');
+    //res.sendFile(path.join(__dirname, '../dist/index.ejs'));
 });
 
 router.get('/signUp', function(req, res){
-    res.render('../src/sign-up.ejs');
-    //res.sendFile(path.join(__dirname, '../src/index.ejs'));
+    res.render('../dist/sign-up.ejs');
+    //res.sendFile(path.join(__dirname, '../dist/index.ejs'));
 });
 
 router.get('/credit', function(req, res){
-    res.render('../src/credit-card.ejs');
-    //res.sendFile(path.join(__dirname, '../src/index.ejs'));
+    res.render('../dist/credit-card.ejs');
+    //res.sendFile(path.join(__dirname, '../dist/index.ejs'));
 });
 
 router.get('/cart', function(req, res){
-    res.render('../src/cart.ejs');
-    //res.sendFile(path.join(__dirname, '../src/index.ejs'));
+    res.render('../dist/cart.ejs');
+    //res.sendFile(path.join(__dirname, '../dist/index.ejs'));
 });
 
 router.route('/book')
@@ -116,7 +116,7 @@ router.get('/users', function(req, res){
         {"id": 3, "firstName":"Tina","lastName":"Jenner", "email":"tina@gmail.com"}
     ]);
 
-    //res.sendFile(path.join(__dirname, '../src/index.html'));
+    //res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
 // a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
@@ -140,14 +140,14 @@ router.get('/user/:id', function (req, res, next) {
 }, function (req, res, next) {
   // render a regular page
   console.log('regular');
-  res.sendFile(path.join(__dirname, '../src/index.html'));
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
 // handler for the /user/:id path, which renders a special page
 router.get('/user/:id', function (req, res, next) {
   console.log(req.params.id);
   console.log('special');
-  res.sendFile(path.join(__dirname, '../src/index.html'));
+  res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
 
 export default {};

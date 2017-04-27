@@ -59,18 +59,44 @@ export default {
     new HtmlWebpackPlugin({
       filename: 'sign-up.html', template: 'src/sign-up.ejs', // Load a custom template (ejs by default see the FAQ for details)
     }),*/
-
+   new HtmlWebpackPlugin({
+      filename: 'cart.ejs', 
+      template: 'src/cart.ejs', // Load a custom template (ejs by default see the FAQ for details)
+      trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
+   }),
+    new HtmlWebpackPlugin({
+      filename: 'credit-card.ejs', 
+      template: 'src/credit-card.ejs', // Load a custom template (ejs by default see the FAQ for details)
+      trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
+   }),
+     new HtmlWebpackPlugin({
+      filename: 'sign-in.ejs', 
+      template: 'src/sign-in.ejs', // Load a custom template (ejs by default see the FAQ for details)
+      trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
+   }),
+    new HtmlWebpackPlugin({
+      filename: 'sign-up.ejs', 
+      template: 'src/sign-up.ejs', // Load a custom template (ejs by default see the FAQ for details)
+      trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
+   }),
+    new HtmlWebpackPlugin({
+      filename: 'faqs.ejs', 
+      template: 'src/faqs.ejs', // Load a custom template (ejs by default see the FAQ for details)
+      trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
+   }),
+   new HtmlWebpackPlugin({
+      filename: 'payform.ejs', 
+      template: 'src/payform.ejs', // Load a custom template (ejs by default see the FAQ for details)
+      trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
+   }),
+      new HtmlWebpackPlugin({
+      filename: 'game-detail.ejs', 
+      template: 'src/game-detail.ejs', // Load a custom template (ejs by default see the FAQ for details)
+      trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
+   }),
     new HtmlWebpackPlugin({
       filename: 'console-gallery.ejs', 
       template: 'src/console-gallery.ejs', // Load a custom template (ejs by default see the FAQ for details)
-      compile: true,
-      inject: true,
-      cache: true,
-      title: 'Webpack App',
-      xhtml: false,
-      showErrors: true,
-      chunks: 'all',
-      excludeChunks: [],
       trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
    }),
     new HtmlWebpackPlugin({
