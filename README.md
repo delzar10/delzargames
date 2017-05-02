@@ -1,4 +1,4 @@
-Delzargames
+## Delzargames
 
 https://delzargames.herokuapp.com/index
 
@@ -6,12 +6,12 @@ https://delzargames.herokuapp.com/index
 
 - Miguel Ángel Delgadillo Zárate
 
-**Descripción del proyecto:**
+## Descripción del proyecto
 
 "Delzargames" tiene como proposito ofrecer una venta de videojuegos y consolas al igual que el concepto de gameplanet y gamers.
 
 
-**Formas de utilizarlo:**
+## Funciones
 
 - Usuarios "Administrador": 
 Serán los encargados de administrar el buen funcionamiento de la página y del servicio dado. Podrán hacer las mismas funciones que los otros tipos de usuarios, así como:
@@ -26,10 +26,10 @@ Serán los encargados de administrar el buen funcionamiento de la página y del 
 Serán usuarios con el rol de obtener notificaciones al momento de los descuentos además de que podrían obtener un descuento extra por ser usuario.
 		
 
-**Requerimientos:**
+##  Requerimientos
 
 
-###**Instalación:**
+##  Instalación
 
 ## License
 MIT
