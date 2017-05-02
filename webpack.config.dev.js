@@ -17,7 +17,7 @@ export default {
     path: path.resolve(__dirname, 'src'), //Create something in memory y se lo pasa al navegador
     publicPath: '/', // Simula los archivos
     //filename: '[name].js' // Simula los archivos
-    filename: '[name].js' // Simula los archivos
+    filename: 'bundle.js' // Simula los archivos
   },
   /*resolve: {
     alias: {
@@ -25,9 +25,14 @@ export default {
     }
   }*/
   plugins: [ 
-    new webpack.optimize.CommonsChunkPlugin({
+    new webpack.ProvidePlugin({
+           $: "jquery",
+           jQuery: "jquery",
+           jquery: 'jquery'
+       }),
+    /*new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor'
-    }),
+    }),*/
    new ExtractTextPlugin("styles.css"//allChunks: true
    )],
    //catching error, hot reloading, linting
@@ -43,6 +48,7 @@ export default {
         exclude: /node_modules/
       },
       //{test: /\.css$/, loader: ExtractTextPlugin.extract("csss?sourceMap")}, //!autoprefixer-loader
+      { test: require.resolve("jquery"), loader: "expose-loader?$!expose-loader?jQuery" },
       {
         test: /\.(css|scss|sass)$/,  // style-loader! inject it to style tag style-loader
         loader: ExtractTextPlugin.extract("css-loader?sourceMap?!sass-loader?sourceMap")

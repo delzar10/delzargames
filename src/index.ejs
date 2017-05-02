@@ -9,10 +9,15 @@
         <!--Import materialize.css-->
         <link type="text/css" rel="stylesheet" href="styles.css">
         <!--Let browser know website is optimized for mobile-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </head>
+
+        <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   <body>
 
@@ -34,7 +39,12 @@
 
    <%# include('./header') #%>
 
-   <%- include('../src/game-gallery', {games: games}) %>
+   <%- include('../src/game-gallery', {games: ps3Games, console: 'PS3'}) %>
+   <%- include('../src/game-gallery', {games: ps4Games, console: 'PS4'}) %>
+   <%- include('../src/game-gallery', {games: xbox360Games, console: 'XBOX 360'}) %>
+   <%- include('../src/game-gallery', {games: xboxOneGames, console: 'XBOX ONE'}) %>
+   <%- include('../src/game-gallery', {games: dsGames, console: '3DS'}) %>
+   <%- include('../src/game-gallery', {games: wiiuGames, console: 'WIIU'}) %>
 
    <%#- include footer #%>
    <%- include ../src/footer %>
@@ -43,9 +53,7 @@
     <div id="users">
     </div>
 
-  
-    <script src="main.js"/>
-    <script src="vendor.js"/>
-    <script src="bundle.js"/>
+    <script src="bundle.js">
+    </script>
   </body>
 </html>

@@ -18,131 +18,62 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
+
   <body>
-<%- include ../src/header %>
+
+    <%- include ../src/header %>
+
 
 
 <div class="container">
-        <div class="creditCardForm">
-            <div class="heading">
-                <h1>Confirm Purchase</h1>
+	<div class="row padding-10">
+        <%- include ../src/sidebar-admin %>
+        <div class="col-md-8">
+            <div class="std padding-10">
+                <div class="cms-page">
+                <h2>Console Form</h2>
+            <form>
+
+		<div class="form-group"> <!-- Name field -->
+		<label class="control-label " for="name">Nombre</label>
+		<input class="form-control" id="name" name="name" type="text" placeholder="Nombre"/>
+	</div>
+    <span class="help-block"></span>
+	
+	<div class="form-group"> <!-- Email field -->
+		<label class="control-label requiredField" for="email">Vendor<span class="asteriskField">*</span></label>
+		<input class="form-control" id="vendor" name="name" type="text" placeholder="Vendor"/>
+	</div>
+    <span class="help-block"></span>
+	
+	<div class="form-group"> <!-- Subject field -->
+		<label class="control-label " for="password">Price:</label>
+		<input class="form-control" id="price" name="number" type="text" placeholder="Price$"/>
+	</div>
+	<span class="help-block"></span>
+
+		<div class="form-group"> <!-- Subject field -->
+		<label class="control-label " for="password">Estatus</label>
+		<input class="form-control" id="" name="name" type="text" placeholder="Estatus" onblur="
+        "/> 
+	</div>
+	<span class="help-block"></span>
+	
+	<div class="form-group">
+		<button class="btn btn-primary " name="submit" type="submit" onclick="
+        validateForm(); return false;">Submit</button>
+	</div>
+	
+</form>		
+            
             </div>
-            <div class="payment">
-                <form>
-                    <div class="form-group owner">
-                        <label for="owner">Owner</label>
-                        <input type="text" class="form-control" id="owner">
-                    </div>
-                    <div class="form-group CVV">
-                        <label for="cvv">CVV</label>
-                        <input type="text" class="form-control" id="cvv">
-                    </div>
-                    <div class="form-group" id="card-number-field">
-                        <label for="cardNumber">Card Number</label>
-                        <input type="text" class="form-control" id="cardNumber">
-                    </div>
-                    <div class="form-group" id="expiration-date">
-                        <label>Expiration Date</label>
-                        <select>
-                            <option value="01">January</option>
-                            <option value="02">February </option>
-                            <option value="03">March</option>
-                            <option value="04">April</option>
-                            <option value="05">May</option>
-                            <option value="06">June</option>
-                            <option value="07">July</option>
-                            <option value="08">August</option>
-                            <option value="09">September</option>
-                            <option value="10">October</option>
-                            <option value="11">November</option>
-                            <option value="12">December</option>
-                        </select>
-                        <select>
-                            <option value="16"> 2016</option>
-                            <option value="17"> 2017</option>
-                            <option value="18"> 2018</option>
-                            <option value="19"> 2019</option>
-                            <option value="20"> 2020</option>
-                            <option value="21"> 2021</option>
-                        </select>
-                    </div>
-                    <div class="form-group" id="credit_cards">
-                        <!--img src="assets/images/visa.jpg" id="visa">
-                        <img src="assets/images/mastercard.jpg" id="mastercard">
-                        <img src="assets/images/amex.jpg" id="amex"-->
-                    </div>
-                    <div class="form-group" id="pay-now">
-                        <button type="submit" class="btn btn-default" id="confirm-purchase">Confirm</button>
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>
 
-<%- include ../src/footer %>
-
-    <script>
-            var owner = $('#owner');
-            var cardNumber = $('#cardNumber');
-            var cardNumberField = $('#card-number-field');
-            var CVV = $("#cvv");
-            var mastercard = $("#mastercard");
-            var confirmButton = $('#confirm-purchase');
-            var visa = $("#visa");
-            var amex = $("#amex");
-
-            // Use the payform library to format and validate
-            // the payment fields.
-
-            cardNumber.payform('formatCardNumber');
-            CVV.payform('formatCardCVC');
-
-
-            cardNumber.keyup(function() {
-
-                amex.removeClass('transparent');
-                visa.removeClass('transparent');
-                mastercard.removeClass('transparent');
-
-                if ($.payform.validateCardNumber(cardNumber.val()) == false) {
-                    cardNumberField.addClass('has-error');
-                } else {
-                    cardNumberField.removeClass('has-error');
-                    cardNumberField.addClass('has-success');
-                }
-
-                if ($.payform.parseCardType(cardNumber.val()) == 'visa') {
-                    mastercard.addClass('transparent');
-                    amex.addClass('transparent');
-                } else if ($.payform.parseCardType(cardNumber.val()) == 'amex') {
-                    mastercard.addClass('transparent');
-                    visa.addClass('transparent');
-                } else if ($.payform.parseCardType(cardNumber.val()) == 'mastercard') {
-                    amex.addClass('transparent');
-                    visa.addClass('transparent');
-                }
-            });
-
-            confirmButton.click(function(e) {
-
-                e.preventDefault();
-
-                var isCardValid = $.payform.validateCardNumber(cardNumber.val());
-                var isCvvValid = $.payform.validateCardCVC(CVV.val());
-
-                if(owner.val().length < 5){
-                    alert("Wrong owner name");
-                } else if (!isCardValid) {
-                    alert("Wrong card number");
-                } else if (!isCvvValid) {
-                    alert("Wrong CVV");
-                } else {
-                    // Everything is correct. Add your form submission code here.
-                    alert("Everything is correct");
-                }
-            });
-    </script>
-<script>
+        </div>
+    </div>
+</div>
+        <%- include ../src/footer %>
+   <script>
         function validateForm(){
             setAllError();
             var inputs = document.getElementsByTagName('input');

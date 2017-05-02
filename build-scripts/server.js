@@ -13,7 +13,7 @@ import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 
 let url = "mongodb://delzar:DELzar_10@ds137110.mlab.com:37110/delzar-games";
-// "mongodb://localhost/mydb"
+//let url = "mongodb://localhost/mydb";
 mongoose.connect((process.env.PROD_MONGODB || url));
 
 var db = mongoose.connection;

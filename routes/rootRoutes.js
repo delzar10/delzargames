@@ -10,27 +10,6 @@ router.get('/', function(req, res){
 
 // si no hay return marca error cant sent headers after sending
     return res.redirect('/index'); 
-
-    /*
-    var newGame = new Game
-    ({ 
-        title: 'Silence', 
-        platform: 'XBOX-ONE',
-        price: 10
-    });
-
-    newGame.save(function (err, fluffy) {
-      if (err) return console.error(err);
-    });
-*/
-
-    console.log('TERMINAR');
-    //res.render('../dist/index.ejs');
-     Game.find(function (err, games) {
-      if (err) return console.error(err)
-      //res.render('../dist/index.html');
-      res.render('../dist/index.ejs', {games: games});
-    });
 });
 
 router.get('/index', function(req, res){
@@ -53,12 +32,57 @@ router.get('/index', function(req, res){
     });
 
 */   
-    Game.find(function (err, games) {
+    /*Game.find(function (err, games) {
       if (err) return console.error(err);
       return res.render('../dist/index.ejs', {games: games});
     });
+    */
 
-    console.log('TERMINAR')
+
+    
+    Game.find({ platform: 'PS3' }).limit(4).exec().then(
+        function (ps3Games){
+            var result = [];
+            result.push(ps3Games);
+            return result;
+    }).then(function (result){
+        return Game.find({ platform: 'PS4' }).limit(4).exec().then(function (ps4Games){
+            result.push(ps4Games);
+            return result;
+        });
+    }).then(function (result){
+        return Game.find({ platform: 'XBOX-36O' }).limit(4).exec().then(function (xbox360Games){
+            result.push(xbox360Games);
+            return result;
+        });
+    }).then(function (result){
+        return Game.find({ platform: 'XBOX-ONE' }).limit(4).exec().then(function (xboxOneGames){
+            result.push(xboxOneGames);
+            return result;
+        });
+    }).then(function (result){
+        return Game.find({ platform: '3DS' }).limit(4).exec().then(function (dsGames){
+            result.push(dsGames);
+            return result;
+        });
+    }).then(function (result){
+        return Game.find({ platform: 'WIIU' }).limit(4).exec().then(function (wiiuGames){
+            result.push(wiiuGames);
+            return result;
+        });
+    }).then(function(result){
+        res.render('../dist/index.ejs', {
+            ps3Games: result[0],
+            ps4Games: result[1],
+            xbox360Games: result[2],
+            xboxOneGames: result[3],
+            dsGames: result[4],
+            wiiuGames: result[5]
+        });
+    }).then(undefined, function(err){
+      console.log(err);
+    });
+
     //res.render('../dist/index.ejs');
     //res.sendFile(path.join(__dirname, '../dist/index.html'));
 });
@@ -68,8 +92,47 @@ router.get('/game', function(req, res){
     //res.sendFile(path.join(__dirname, '../dist/index.ejs'));
 });
 
-router.get('/faqs', function(req, res){
-    res.render('../dist/faqs.ejs');
+router.get('/users', function(req, res){
+    res.render('../dist/users.ejs');
+    //res.sendFile(path.join(__dirname, '../dist/index.ejs'));
+});
+
+router.get('/consoles', function(req, res){
+    res.render('../dist/consoles.ejs');
+    //res.sendFile(path.join(__dirname, '../dist/index.ejs'));
+});
+
+router.get('/games', function(req, res){
+
+    Game.find({}, function(err, games){
+        if (err) return console.error(err);
+        res.render('../dist/games.ejs', {games: games});
+    });
+    //res.sendFile(path.join(__dirname, '../dist/index.ejs'));
+});
+
+router.get('/consoles', function(req, res){
+    res.render('../dist/consoles.ejs');
+    //res.sendFile(path.join(__dirname, '../dist/index.ejs'));
+});
+
+router.get('/new-admin', function(req, res){
+    res.render('../dist/admin-form.ejs');
+    //res.sendFile(path.join(__dirname, '../dist/index.ejs'));
+});
+
+router.get('/new-game', function(req, res){
+    res.render('../dist/game-form.ejs');
+    //res.sendFile(path.join(__dirname, '../dist/index.ejs'));
+});
+
+router.get('/new-console', function(req, res){
+    res.render('../dist/console-form.ejs');
+    //res.sendFile(path.join(__dirname, '../dist/index.ejs'));
+});
+
+router.get('/contact', function(req, res){
+    res.render('../dist/contact.ejs');
     //res.sendFile(path.join(__dirname, '../dist/index.ejs'));
 });
 
@@ -98,6 +161,26 @@ router.get('/cart', function(req, res){
     //res.sendFile(path.join(__dirname, '../dist/index.ejs'));
 });
 
+router.get('/account', function(req, res){
+    res.render('../dist/account.ejs');
+});
+
+router.get('/user-form', function(req, res){
+    res.render('../dist/user-form.ejs');
+});
+
+router.get('/password-form', function(req, res){
+    res.render('../dist/password-form.ejs');
+});
+
+router.get('/invoice-form', function(req, res){
+    res.render('../dist/invoice-form.ejs');
+});
+
+router.get('/admin', function(req, res){
+    res.render('../dist/admin.ejs');
+});
+
 router.route('/book')
   .get(function (req, res) {
     res.send('Get a random book')
@@ -108,16 +191,6 @@ router.route('/book')
   .put(function (req, res) {
     res.send('Update the book')
   });
-
-router.get('/users', function(req, res){
-    res.json([
-        {"id": 1, "firstName":"Bob","lastName":"Smith", "email":"bob@gmail.com"},
-        {"id": 2, "firstName":"Tammy","lastName":"Glendal", "email":"tammy@gmail.com"},
-        {"id": 3, "firstName":"Tina","lastName":"Jenner", "email":"tina@gmail.com"}
-    ]);
-
-    //res.sendFile(path.join(__dirname, '../dist/index.html'));
-});
 
 // a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
 router.use('/user/:id', function(req, res, next) {

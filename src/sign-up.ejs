@@ -8,10 +8,15 @@
         <!--Import materialize.css-->
         <link type="text/css" rel="stylesheet" href="styles.css"/>
         <!--Let browser know website is optimized for mobile-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </head>
+
+        <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
 
   <body>
@@ -56,7 +61,7 @@
                 <form class="omb_loginForm" action="" autocomplete="off" method="POST">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        <input type="text" class="form-control" name="username" placeholder="email address"  onblur="validateEmail(this);">
+                        <input type="text" class="form-control" name="username" placeholder="Username"  onblur="validateUsername(this);">
                     </div>
                     <span class="help-block"></span>
 
@@ -69,14 +74,14 @@
                     
                     <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            <input size="60" maxlength="255" class="form-control" placeholder="First Name" name="firstName" id="UserRegistration_fname" type="text" onblur="requiredField(this)">                                    
+                            <input size="60" maxlength="255" class="form-control" placeholder="First Name" name="name" id="UserRegistration_fname" type="text" onblur="requiredField(this)">                                    
                     </div>
 
                     <span class="help-block"></span>
 
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        <input size="60" maxlength="255" class="form-control" placeholder="Last Name" name="lastName" id="UserRegistration_lname" type="text" onblur="requiredField(this)">                                    
+                        <input size="60" maxlength="255" class="form-control" placeholder="Last Name" name="name" id="UserRegistration_lname" type="text" onblur="requiredField(this)">                                    
                     </div>
 
                     <span class="help-block"></span>
@@ -95,20 +100,8 @@
 
                     <span class="help-block"></span>
 
-                    <button class="btn btn-lg btn-primary btn-block" type="button" onclick="setAllError();">Sign Up</button>
+                    <button class="btn btn-lg btn-primary btn-block" type="button" onclick="validateForm();">Sign Up</button>
                 </form>
-            </div>
-        </div>
-        <div class="row omb_row-sm-offset-3">
-            <div class="col-xs-12 col-sm-3">
-                <label class="checkbox">
-                    <input type="checkbox" value="remember-me">Remember Me
-                </label>
-            </div>
-            <div class="col-xs-12 col-sm-3">
-                <p class="omb_forgotPwd">
-                    <a href="#">Forgot password?</a>
-                </p>
             </div>
         </div>
     </div>
@@ -121,6 +114,35 @@
 
 
     <script>
+        function validateForm(){
+            setAllError();
+            var inputs = document.getElementsByTagName('input');
+
+            for (var i = 0; i < inputs.length; i++){
+                if (inputs[i].name === 'name'){
+                    onlyLetters(inputs[i]);
+                } 
+                else if (inputs[i].name === 'number'){
+                    onlyNumbers(inputs[i]);
+                } 
+                else if (inputs[i].name === 'email'){
+                    validateEmail(inputs[i]);
+                } 
+                else if (inputs[i].name === 'password'){
+                    requiredField(inputs[i]);
+                } 
+                else if (inputs[i].name === 'username'){
+                    validateUsername(inputs[i]);
+                } 
+                else if (inputs[i].name === 'alphanumeric'){
+                    alphanumeric(inputs[i]);
+                } 
+                else if (inputs[i].name === 'zip'){
+                    validateZIP(inputs[i]);
+                } 
+            }
+        }
+
         function validateEmail(input) {
             requiredField(input);
             var email = input.value;
@@ -133,7 +155,6 @@
 
         function requiredField(input)   
         {  
-            setError(input, 'Se requiere este campo'); 
             if (input.value.length == 0)  
             {   
                 setError(input, 'Se requiere este campo');  
@@ -145,6 +166,8 @@
 
         function onlyLetters(input)  
         {  
+        requiredField(input);
+
         var letters = /^[A-Za-z]+$/;  
         if(input.value.match(letters))  
             {  
@@ -174,6 +197,7 @@
         // Function to check letters and numbers  
         function alphanumeric(input)  
         {  
+            requiredField(input);
         var letterNumber = /^[0-9a-zA-Z]+$/;  
         if(input.value.match(letterNumber))   
         {  
@@ -185,6 +209,18 @@
             return false;   
             }  
         }  
+
+        function validateUsername(input){
+            requiredField(input);
+            
+            var usernameRegex = /^[a-zA-Z0-9]+$/;
+            if(input.value.match(usernameRegex)) {  
+               return true;  
+            }  else {  
+                setError(input, 'Solo se aceptan valores de Usuario, Primero letras');  
+                return false;   
+            }  
+        }
 
         function lengthRange(input, minlength, maxlength)  
         {     
@@ -200,6 +236,15 @@
             }    
         }  
 
+        function validateZIP(input){
+            onlyNumbers(input);
+
+            if (input.value.length != 5){
+                setError(input, 'El tamaño del codigo debe ser de 5 numeros');
+                return false;
+            }
+        }
+
         function setAllError(){
             var elems = document.getElementsByClassName("help-block");
 
@@ -213,7 +258,8 @@
             next.innerHTML = err;
         }
     </script>
-    <script src="bundle.js"/>
+    <script src="bundle.js">
+        </script>
     
     <!--script src="main.js"/>
     <script src="vendor.js"/-->

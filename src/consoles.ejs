@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--Import Google Icon Font-->
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="styles.css">
+        <!--Let browser know website is optimized for mobile-->
+		<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+
+   <!-- si utiliza ejs-compiled-loader es necesario utilizar src/pathToFile -->
+   <%- include ../src/header %>
+
+   <div class="container padding-10">
+       <div class="row">
+         <%- include ../src/sidebar-admin %>
+         <div class="col-sm-8">
+		<div class="main-box clearfix">
+			<div class="table-responsive">
+				<table class="table user-list">
+					<thead>
+						<tr>
+							<th><span>Nombre</span></th>
+							<th><span>Precio</span></th>
+							<th class="text-center"><span>Status</span></th>
+							<th>&nbsp;</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<img src="http://media.nintendo.com/nintendo/cocoon/switch-static-pages/switch/etRgxnAu0zRX4bmWnt9K628wG7YQUI6t/images/switch/home/bundle1.jpg" alt="">
+								<a href="#" class="user-link">Switch</a>
+								<span class="user-subhead">Nintendo</span>
+							</td>
+							<td class="text-center">
+								<span class="label label-default">500$</span>
+							</td>
+							<td>
+								<a href="#">Disponible</a>
+							</td>
+							<td style="width: 20%;">
+								<a href="#" class="table-link">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+									</span>
+								</a>
+								<a href="#" class="table-link">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+									</span>
+								</a>
+								<a href="#" class="table-link danger">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+									</span>
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<img src="http://static.trustedreviews.com/94/00003bb8e/9eda_orh500w750/3ds.jpg" alt="">
+								<a href="#" class="user-link">3DS</a>
+								<span class="user-subhead">Nintendo</span>
+							</td>
+							<td class="text-center">
+								<span class="label label-default">150$</span>
+							</td>
+							<td>
+								<a href="#">Disponible</a>
+							</td>
+							<td style="width: 20%;">
+								<a href="#" class="table-link">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+									</span>
+								</a>
+								<a href="#" class="table-link">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+									</span>
+								</a>
+								<a href="#" class="table-link danger">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+									</span>
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<img src="https://cdn02.nintendo-europe.com/media/images/08_content_images/systems_5/wiiu_12/hardware_features/packs/WiiU_HW_BASIC_Box_PS_White_EUB_image600w.png" alt="">
+								<a href="#" class="user-link">Wii U</a>
+								<span class="user-subhead">Nintendo</span>
+							</td>
+							<td class="text-center">
+								<span class="label label-default">200$</span>
+							</td>
+							<td>
+								<a href="#">Disponible</a>
+							</td>
+							<td style="width: 20%;">
+								<a href="#" class="table-link">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-search-plus fa-stack-1x fa-inverse"></i>
+									</span>
+								</a>
+								<a href="#" class="table-link">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+									</span>
+								</a>
+								<a href="#" class="table-link danger" onclick="this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);">
+									<span class="fa-stack">
+										<i class="fa fa-square fa-stack-2x"></i>
+										<i class="fa fa-trash-o fa-stack-1x fa-inverse"></i>
+									</span>
+								</a>
+							</td>
+						</tr>
+                        			</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+       </div>
+   </div>
+   
+   <%- include ../src/footer %>
+
+    <script src="bundle.js">
+    </script>
+  </body>
+</html>

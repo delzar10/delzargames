@@ -99,6 +99,66 @@ export default {
       template: 'src/console-gallery.ejs', // Load a custom template (ejs by default see the FAQ for details)
       trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
    }),
+   new HtmlWebpackPlugin({
+      filename: 'account.ejs', 
+      template: 'src/account.ejs', // Load a custom template (ejs by default see the FAQ for details)
+      trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
+   }),
+   new HtmlWebpackPlugin({
+      filename: 'admin-form.ejs', 
+      template: 'src/admin-form.ejs', // Load a custom template (ejs by default see the FAQ for details)
+      trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
+   }),
+   new HtmlWebpackPlugin({
+      filename: 'admin.ejs', 
+      template: 'src/admin.ejs', // Load a custom template (ejs by default see the FAQ for details)
+      trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
+   }),
+   new HtmlWebpackPlugin({
+      filename: 'console-form.ejs', 
+      template: 'src/console-form.ejs', // Load a custom template (ejs by default see the FAQ for details)
+      trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
+   }),
+   new HtmlWebpackPlugin({
+      filename: 'consoles.ejs', 
+      template: 'src/consoles.ejs', // Load a custom template (ejs by default see the FAQ for details)
+      trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
+   }),
+   new HtmlWebpackPlugin({
+      filename: 'contact.ejs', 
+      template: 'src/contact.ejs', // Load a custom template (ejs by default see the FAQ for details)
+      trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
+   }),
+   new HtmlWebpackPlugin({
+      filename: 'game-form.ejs', 
+      template: 'src/game-form.ejs', // Load a custom template (ejs by default see the FAQ for details)
+      trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
+   }),
+   new HtmlWebpackPlugin({
+      filename: 'games.ejs', 
+      template: 'src/games.ejs', // Load a custom template (ejs by default see the FAQ for details)
+      trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
+   }),
+   new HtmlWebpackPlugin({
+      filename: 'invoice-form.ejs', 
+      template: 'src/invoice-form.ejs', // Load a custom template (ejs by default see the FAQ for details)
+      trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
+   }),
+   new HtmlWebpackPlugin({
+      filename: 'password-form.ejs', 
+      template: 'src/password-form.ejs', // Load a custom template (ejs by default see the FAQ for details)
+      trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
+   }),
+   new HtmlWebpackPlugin({
+      filename: 'user-form.ejs', 
+      template: 'src/user-form.ejs', // Load a custom template (ejs by default see the FAQ for details)
+      trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
+   }),
+   new HtmlWebpackPlugin({
+      filename: 'users.ejs', 
+      template: 'src/users.ejs', // Load a custom template (ejs by default see the FAQ for details)
+      trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
+   }),
     new HtmlWebpackPlugin({
       filename: 'index.ejs',
       template: 'src/index.ejs',  // ejs-loader default loader
@@ -162,7 +222,7 @@ export default {
      // {test: /\.scss$/, loader: ExtractTextPlugin.extract("css?sourceMap?!sass?sourceMap")},
      {
         test: /\.(css|scss|sass)$/,  // style-loader! inject it to style tag style-loader
-        loader: ExtractTextPlugin.extract("css-loader?sourceMap?!sass-loader?sourceMap")
+        loader: ExtractTextPlugin.extract("css-loader?sourceMap?!postcss-loader!sass-loader?sourceMap")
       },
       {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader?mimetype=image/svg+xml'},
       {test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader?mimetype=application/font-woff"},
