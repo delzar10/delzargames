@@ -1,6 +1,6 @@
 ## Delzargames
 
-https://delzargames.herokuapp.com/index
+https://delzargames.herokuapp.com/
 
 ***Desarrolladores:***
 
