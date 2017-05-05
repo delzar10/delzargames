@@ -29,26 +29,26 @@
     <%# } %>
 
    <!-- si utiliza ejs-compiled-loader es necesario utilizar src/pathToFile -->
-   <%#- include src/header %> 
-   <%- include ../src/header %>
+   <%#- include src/header %>
+   <%- include header %>
 
    <!-- si utiliza ejs-compiled-loader es necesario utilizar src/pathToFile -->
    <%#- include src/best-seller %>
-   <%- include ../src/best-seller %>
+   <%- include best-seller %>
 
 
    <%# include('./header') #%>
 
-   <%- include('../src/game-gallery', {games: ps3Games, console: 'PS3'}) %>
-   <%- include('../src/game-gallery', {games: ps4Games, console: 'PS4'}) %>
-   <%- include('../src/game-gallery', {games: xbox360Games, console: 'XBOX 360'}) %>
-   <%- include('../src/game-gallery', {games: xboxOneGames, console: 'XBOX ONE'}) %>
-   <%- include('../src/game-gallery', {games: dsGames, console: '3DS'}) %>
-   <%- include('../src/game-gallery', {games: wiiuGames, console: 'WIIU'}) %>
+   <%- include('game-gallery', {games: ps3Games, console: 'PS3'}) %>
+   <%- include('game-gallery', {games: ps4Games, console: 'PS4'}) %>
+   <%- include('game-gallery', {games: xbox360Games, console: 'XBOX 360'}) %>
+   <%- include('game-gallery', {games: xboxOneGames, console: 'XBOX ONE'}) %>
+   <%- include('game-gallery', {games: dsGames, console: '3DS'}) %>
+   <%- include('game-gallery', {games: wiiuGames, console: 'WIIU'}) %>
 
    <%#- include footer #%>
-   <%- include ../src/footer %>
-   
+   <%- include footer %>
+
 
     <div id="users">
     </div>

@@ -29,7 +29,15 @@ import './sass/main.scss';
 //window.courseValue = courseValue;
 
 
-global.users = getUsers(); 
+function requireAll(requireContext) {
+  return requireContext.keys().map(requireContext);
+}
+// requires and returns all modules that match
+
+var modules = requireAll(require.context("./images/", true, /^\.\/.*\.(gif|png|jpe?g|svg)$/));
+
+
+global.users = getUsers();
 
 getUsers().then( result => {
     console.log(`I entered getUsers`);

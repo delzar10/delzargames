@@ -12,7 +12,7 @@
         </div>
         <div class="row">
               <% games.forEach(function(game){ %>
-                <%- include('../src/game-preview', {game: game, colsize: 'col-sm-3 col-xs-6'}); %>
+                <%- include('game-preview', {game: game, colsize: 'col-sm-3 col-xs-6'}); %>
               <% }); %>
         </div>
       </div>

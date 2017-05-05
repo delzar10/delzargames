@@ -21,13 +21,13 @@
 
   <body>
 
-    <%- include ../src/header %>
+    <%- include header %>
 
 
 
 <div class="container">
 	<div class="row padding-10">
-        <%- include ../src/sidebar-admin %>
+        <%- include sidebar-admin %>
         <div class="col-md-8">
             <div class="std padding-10">
                 <div class="cms-page">
@@ -39,13 +39,13 @@
 		<input class="form-control" id="name" name="name" type="text" placeholder="Nombre"/>
 	</div>
     <span class="help-block"></span>
-	
+
 	<div class="form-group"> <!-- Email field -->
 		<label class="control-label requiredField" for="email">Vendor<span class="asteriskField">*</span></label>
 		<input class="form-control" id="vendor" name="name" type="text" placeholder="Vendor"/>
 	</div>
     <span class="help-block"></span>
-	
+
 	<div class="form-group"> <!-- Subject field -->
 		<label class="control-label " for="password">Price:</label>
 		<input class="form-control" id="price" name="number" type="text" placeholder="Price$"/>
@@ -55,24 +55,24 @@
 		<div class="form-group"> <!-- Subject field -->
 		<label class="control-label " for="password">Estatus</label>
 		<input class="form-control" id="" name="name" type="text" placeholder="Estatus" onblur="
-        "/> 
+        "/>
 	</div>
 	<span class="help-block"></span>
-	
+
 	<div class="form-group">
 		<button class="btn btn-primary " name="submit" type="submit" onclick="
         validateForm(); return false;">Submit</button>
 	</div>
-	
-</form>		
-            
+
+</form>
+
             </div>
     </div>
 
         </div>
     </div>
 </div>
-        <%- include ../src/footer %>
+        <%- include footer %>
    <script>
         function validateForm(){
             setAllError();
@@ -81,25 +81,25 @@
             for (var i = 0; i < inputs.length; i++){
                 if (inputs[i].name === 'name'){
                     onlyLetters(inputs[i]);
-                } 
+                }
                 else if (inputs[i].name === 'number'){
                     onlyNumbers(inputs[i]);
-                } 
+                }
                 else if (inputs[i].name === 'email'){
                     validateEmail(inputs[i]);
-                } 
+                }
                 else if (inputs[i].name === 'password'){
                     requiredField(inputs[i]);
-                } 
+                }
                 else if (inputs[i].name === 'username'){
                     validateUsername(inputs[i]);
-                } 
+                }
                 else if (inputs[i].name === 'alphanumeric'){
                     alphanumeric(inputs[i]);
-                } 
+                }
                 else if (inputs[i].name === 'zip'){
                     validateZIP(inputs[i]);
-                } 
+                }
             }
         }
 
@@ -109,92 +109,92 @@
             if (!email.match("/[_+a-zA-Z0-9-]+(\.[_+a-zA-Z0-9-])*@[_+a-zA-Z0-9-]+(\.([a-zA-Z]{2,}))+/i")) {
                 setError(input, 'Email incorrector');
                 return false;
-            }  
+            }
             setError(input, '');
         }
 
-        function requiredField(input)   
-        {  
-            if (input.value.length == 0)  
-            {   
-                setError(input, 'Se requiere este campo');  
-                return false;   
-            }       
+        function requiredField(input)
+        {
+            if (input.value.length == 0)
+            {
+                setError(input, 'Se requiere este campo');
+                return false;
+            }
             setError(input, '');
-            return true;   
-        } 
+            return true;
+        }
 
-        function onlyLetters(input)  
-        {  
+        function onlyLetters(input)
+        {
         requiredField(input);
 
-        var letters = /^[A-Za-z]+$/;  
-        if(input.value.match(letters))  
-            {  
-            return true;  
-            }  
-        else  
-            {  
-            setError(input, 'Solo se aceptan Letras');  
-            return false;   
-            }  
-        }  
+        var letters = /^[A-Za-z]+$/;
+        if(input.value.match(letters))
+            {
+            return true;
+            }
+        else
+            {
+            setError(input, 'Solo se aceptan Letras');
+            return false;
+            }
+        }
 
             //requiredField FIELD
 
 
 
-        function onlyNumbers(input)  
-        {  
-            var numbers = /^[0-9]+$/;  
-            if(!input.value.match(numbers))  
-            {  
-            setError(input, 'Solo se aceptan numeros');  
-            return false;   
-            }  
-        }  
+        function onlyNumbers(input)
+        {
+            var numbers = /^[0-9]+$/;
+            if(!input.value.match(numbers))
+            {
+            setError(input, 'Solo se aceptan numeros');
+            return false;
+            }
+        }
 
-        // Function to check letters and numbers  
-        function alphanumeric(input)  
-        {  
+        // Function to check letters and numbers
+        function alphanumeric(input)
+        {
             requiredField(input);
-        var letterNumber = /^[0-9a-zA-Z]+$/;  
-        if(input.value.match(letterNumber))   
-        {  
-        return true;  
-        }  
-        else  
-            {  
-            setError(input, 'Solo se aceptan valores alfanumericos');  
-            return false;   
-            }  
-        }  
+        var letterNumber = /^[0-9a-zA-Z]+$/;
+        if(input.value.match(letterNumber))
+        {
+        return true;
+        }
+        else
+            {
+            setError(input, 'Solo se aceptan valores alfanumericos');
+            return false;
+            }
+        }
 
         function validateUsername(input){
             requiredField(input);
-            
+
             var usernameRegex = /^[a-zA-Z0-9]+$/;
-            if(input.value.match(usernameRegex)) {  
-               return true;  
-            }  else {  
-                setError(input, 'Solo se aceptan valores de Usuario, Primero letras');  
-                return false;   
-            }  
+            if(input.value.match(usernameRegex)) {
+               return true;
+            }  else {
+                setError(input, 'Solo se aceptan valores de Usuario, Primero letras');
+                return false;
+            }
         }
 
-        function lengthRange(input, minlength, maxlength)  
-        {     
-        var userInput = input.value;    
-        if(userInput.length >= minlength && userInput.length <= maxlength)  
-            {       
-                return true;      
-            }  
-        else  
-            {       
-            setError(input, "Por favor ingresa un valor entre " +minlength+ " y " +maxlength);         
-                return false;     
-            }    
-        }  
+        function lengthRange(input, minlength, maxlength)
+        {
+        var userInput = input.value;
+        if(userInput.length >= minlength && userInput.length <= maxlength)
+            {
+                return true;
+            }
+        else
+            {
+            setError(input, "Por favor ingresa un valor entre " +minlength+ " y " +maxlength);
+                return false;
+            }
+        }
 
         function validateZIP(input){
             onlyNumbers(input);

@@ -19,7 +19,7 @@
   </head>
 
   <body>
-  <%- include ../src/header %>
+  <%- include header %>
     <%# include('./header') %>
 
       <div class="container padding-top-10">
@@ -29,7 +29,7 @@
           </div>
           <div class="col-sm-6" style="border:0px solid gray">
                     <!-- Datos del vendedor y titulo del producto -->
-                    <h3>GameName</h3>    
+                    <h3>GameName</h3>
                     <h5 style="color:#337ab7"><a href="#">MICROSOFT</a> · <small style="color:#337ab7">selled</small></h5>
 
                     <!-- Precios -->
@@ -38,30 +38,30 @@
 
                     <!-- Detalles especificos del producto -->
                     <div class="section" style="padding-bottom:5px;">
-                        <h6 class="title-attr"><small>CAPACIDAD</small></h6>                    
+                        <h6 class="title-attr"><small>CAPACIDAD</small></h6>
                         <div class="width100 flex">
                             <div class="attr2 ">Adulto</div>
                             <div class="attr2">Guerras</div>
                         </div>
-                    </div>   
+                    </div>
                     <div class="section" style="padding-bottom:20px;">
-                        <h6 class="title-attr"><small>CANTIDAD</small></h6>                    
+                        <h6 class="title-attr"><small>CANTIDAD</small></h6>
                         <div class="width100 flex">
                             <div class="btn-minus"><span class="glyphicon glyphicon-minus"></span></div>
                             <input id="cantidad" value="1" />
                             <div class="btn-plus"><span class="glyphicon glyphicon-plus"></span></div>
                         </div>
-                    </div>                
+                    </div>
 
                     <!-- Botones de compra -->
                     <div class="section" style="padding-bottom:20px;">
                         <button class="btn btn-success" onclick="
                             document.getElementById('selected-items').innerHTML = Number(document.getElementById('selected-items').innerHTML) + Number(document.getElementById('cantidad').value);
-                        
+
                         "><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Agregar al carro</button>
                         <!--h6><a href="#"><span class="glyphicon glyphicon-heart-empty" style="cursor:pointer;"></span> Agregar a lista de deseos</a></h6-->
-                    </div>                                        
-                </div>                              
+                    </div>
+                </div>
 
                 <div class="col-sm-6">
                     <ul class="menu-items">
@@ -79,14 +79,14 @@
                         <small>
                         <ul>
                             <li>Juego Protatil</li>
-                        </ul>  
+                        </ul>
                         </small>
                     </div>
-                </div>		
+                </div>
         </div>
       </div>
 
-    <script> 
+    <script>
             $("ul.menu-items > li").on("click",function(){
                 $("ul.menu-items > li").removeClass("active");
                 $(this).addClass("active");
@@ -108,7 +108,7 @@
                 }else{
                     $(".section > div > input").val("1");
                 }
-            })            
+            })
             $(".btn-plus").on("click",function(){
                 var now = $(".section > div > input").val();
                 if ($.isNumeric(now)){
@@ -118,7 +118,7 @@
                 }
             });
     </script>
-    <%- include ../src/footer %>
+    <%- include footer %>
 
     <script src="bundle.js"/>
   </body>

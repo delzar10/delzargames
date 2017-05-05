@@ -22,11 +22,11 @@
   <body>
 
    <!-- si utiliza ejs-compiled-loader es necesario utilizar src/pathToFile -->
-   <%- include ../src/header %>
+   <%- include header %>
 
    <div class="container padding-10">
        <div class="row">
-         <%- include ../src/sidebar-admin %>
+         <%- include sidebar-admin %>
          <div class="col-sm-8">
 		<div class="main-box clearfix">
 			<div class="table-responsive">
@@ -75,7 +75,7 @@
 							</td>
 						</tr>
 						<% }); %>
-						
+
                         </tbody>
 				</table>
 			</div>
@@ -85,8 +85,8 @@
 </div>
        </div>
    </div>
-   
-   <%- include ../src/footer %>
+
+   <%- include footer %>
 
     <script src="bundle.js">
     </script>
