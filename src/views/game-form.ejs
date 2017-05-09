@@ -24,44 +24,48 @@
 
     <%- include header %>
 
-
-
-<div class="container">
-	<div class="row padding-10">
+<div class="container ">
+    <div class="row padding-10 ">
         <%- include sidebar-admin %>
-        <div class="col-md-8">
-            <div class="std padding-10">
-                <div class="cms-page">
-                <h2>Game Form</h2>
-            <form>
-
-	<div class="form-group"> <!-- Name field -->
-		<label class="control-label " for="name">Nombre</label>
-		<input class="form-control" id="name" name="name" type="text" placeholder="Nombre"/>
-	</div>
+  <div class="col-sm-8">
+  <div class="std">
+  <div class="cms-page">
+    <h2>Game Form</h2>
+  <form action="/save-game" method="post">
+    <div class="form-group"> <!-- Name field -->
+        <label class="control-label " for="name">Nombre</label>
+        <input class="form-control" id="name" name="name" type="text" placeholder="Nombre"/>
+    </div>
     <span class="help-block"></span>
 
-	<div class="form-group"> <!-- Email field -->
-		<label class="control-label requiredField" for="consola">Consola<span class="asteriskField">*</span></label>
-		<input class="form-control" id="consola" name="name" type="text" placeholder="Consola"/>
-	</div>
+    <div class="form-group"> <!-- Email field -->
+        <label class="control-label requiredField" for="consola">Consola<span class="asteriskField">*</span></label>
+        <input class="form-control" id="consola" name="name" type="text" placeholder="Consola"/>
+    </div>
     <span class="help-block"></span>
 
-	<div class="form-group"> <!-- Subject field -->
-		<label class="control-label " for="precio">Price</label>
-		<input class="form-control" id="precio" name="number" type="text" placeholder="Precio"/>
-	</div>
-	<span class="help-block"></span>
+    <div class="form-group"> <!-- Subject field -->
+        <label class="control-label " for="precio">Price</label>
+        <input class="form-control" id="precio" name="number" type="text" placeholder="Precio"/>
+    </div>
+    <span class="help-block"></span>
 
-		<div class="form-group"> <!-- Subject field -->
-		<label class="control-label " for="estatus">Estatus</label>
-		<input class="form-control" id="estatus" name="name" type="text" placeholder="Estatus" onblur=""/>
-	</div>
-	<span class="help-block"></span>
+    <div class="form-group"> <!-- Subject field -->
+        <label class="control-label " for="estatus">Estatus</label>
+        <input class="form-control" id="estatus" name="name" type="text" placeholder="Estatus" onblur=""/>
+    </div>
+    <span class="help-block"></span>
 
-	<div class="form-group">
-		<button class="btn btn-primary " name="submit" type="submit" onclick="validateForm(); return false;">Submit</button>
-	</div>
+    <div class="form-group"> <!-- Subject field -->
+        <label for="fileToUpload">Select Files to Upload</label><br />
+        <input type="file" name="filesToUpload[]" id="filesToUpload" multiple="multiple" />
+        <output id="filesInfo"></output>
+    </div>
+    <span class="help-block"></span>
+
+    <div class="form-group">
+        <button class="btn btn-primary " name="submit" type="submit" onclick="validateForm(); return false;">Submit</button>
+    </div>
 
 </form>
 
@@ -72,6 +76,8 @@
     </div>
 </div>
         <%- include footer %>
+
+
    <script>
         function validateForm(){
             setAllError();

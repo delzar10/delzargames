@@ -24,7 +24,9 @@ router.get('/index', function(req, res){
     ({
         title: 'Silence',
         platform: 'XBOX-ONE',
-        price: 10
+        price: 10,
+        a.img.data = fs.readFileSync(imgPath);
+        a.img.contentType = 'image/png';
     });
 
     newGame.save(function (err, fluffy) {
@@ -181,6 +183,11 @@ router.get('/admin', function(req, res){
     res.render('../src/views/admin.ejs');
 });
 
+router.post('/save-game', function(req, res){
+    console.log(req.body.params);
+    res.sendfile('../src/views/index.ejs')
+});
+
 router.route('/book')
   .get(function (req, res) {
     res.send('Get a random book')
@@ -222,6 +229,19 @@ router.get('/user/:id', function (req, res, next) {
   console.log('special');
   res.sendFile(path.join(__dirname, '../src/views/index.html'));
 });
+
+router.get('/form', function (req, res) {
+        console.log('template form');
+
+        res.render('../src/views/form.ejs', {
+            title: "Login", //page title
+            action: "/login", //post action for the form
+            fields: [
+            {name:'email',type:'text',property:'required'},   //first field for the form
+            {name:'password',type:'password',property:'required'}   //another field for the form
+            ]
+        });
+    });
 
 export default {};
 module.exports = router;

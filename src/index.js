@@ -34,7 +34,7 @@ function requireAll(requireContext) {
 }
 // requires and returns all modules that match
 
-var modules = requireAll(require.context("./images/", true, /^\.\/.*\.(gif|png|jpe?g|svg)$/));
+//var modules = requireAll(require.context("./images/", true, /^\.\/.*\.(gif|png|jpe?g|svg)$/));
 
 
 global.users = getUsers();
