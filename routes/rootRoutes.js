@@ -184,8 +184,25 @@ router.get('/admin', function(req, res){
 });
 
 router.post('/save-game', function(req, res){
-    console.log(req.body.params);
-    res.sendfile('../src/views/index.ejs')
+    console.log('parametros:');
+    console.log(req.query);
+    console.log(req.body);
+
+     var newGame = new Game
+    ({
+        title: 'Silence',
+        platform: 'XBOX-ONE',
+        price: 10
+    });
+
+    newGame.img.data = req.body.pic;
+    newGame.img.contentType = 'image/png';
+
+   newGame.save(function (err, fluffy) {
+      if (err) return console.error(err);
+    });
+
+    res.render('../src/views/admin.ejs');
 });
 
 router.route('/book')

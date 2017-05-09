@@ -31,7 +31,7 @@
   <div class="std">
   <div class="cms-page">
     <h2>Game Form</h2>
-  <form action="/save-game" method="post">
+  <form action="/save-game" method="POST">
     <div class="form-group"> <!-- Name field -->
         <label class="control-label " for="name">Nombre</label>
         <input class="form-control" id="name" name="name" type="text" placeholder="Nombre"/>
@@ -57,14 +57,13 @@
     <span class="help-block"></span>
 
     <div class="form-group"> <!-- Subject field -->
-        <label for="fileToUpload">Select Files to Upload</label><br />
-        <input type="file" name="filesToUpload[]" id="filesToUpload" multiple="multiple" />
-        <output id="filesInfo"></output>
+        <label for="pic">Select images:</label><br />
+         <input type="file" name="pic" multiple>
     </div>
     <span class="help-block"></span>
 
     <div class="form-group">
-        <button class="btn btn-primary " name="submit" type="submit" onclick="validateForm(); return false;">Submit</button>
+        <button class="btn btn-primary " name="submit" type="submit" onclick="validateForm();">Submit</button>
     </div>
 
 </form>
