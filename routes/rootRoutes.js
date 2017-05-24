@@ -1,6 +1,15 @@
 import express from 'express';
 import {User} from '../model/User';
 import {Game} from '../model/Game';
+import {Console} from '../model/Console';
+import {Vendor} from '../model/Vendor'
+import {ArticleStatus} from '../model/ArticleStatus';
+import multer from 'multer';
+import path from 'path';
+import fs from 'fs';
+import Util from '../src/js/utils/util'
+
+const util = new Util();
 
 var router = express.Router();
 
@@ -40,8 +49,6 @@ router.get('/index', function(req, res){
     });
     */
 
-
-
     Game.find({ platform: 'PS3' }).limit(4).exec().then(
         function (ps3Games){
             var result = [];
@@ -73,6 +80,7 @@ router.get('/index', function(req, res){
             return result;
         });
     }).then(function(result){
+        console.log(result);
         res.render('../src/views/index.ejs', {
             ps3Games: result[0],
             ps4Games: result[1],
@@ -129,11 +137,29 @@ router.get('/new-game', function(req, res){
 });
 
 router.get('/new-console', function(req, res){
-    res.render('../src/views/console-form.ejs');
-    //res.sendFile(path.join(__dirname, '../src/views/index.ejs'));
+    async function queryResult(){
+        console.log("Hola DESDE METODO ASYNC");
+        const vendors = await Vendor.find({});
+        console.log(vendors);
+        const statuses = await ArticleStatus.find({});
+        console.log(statuses);
+        return {vendors, statuses};   
+    }
+    console.log("Entre la funcion ASYNC");
+    queryResult().then( results =>{
+        console.log("DENTRO DE LO ULTIMO la funcion ASYNC");
+        console.log("Resultados: ");
+        console.log(results);
+        return res.render(path.join(__dirname, '../src/views/console-form.ejs', {vendors:results[0], statuses:results[1]}));
+    })
+    
 });
 
+
+
+
 router.get('/contact', function(req, res){
+      
     res.render('../src/views/contact.ejs');
     //res.sendFile(path.join(__dirname, '../src/views/index.ejs'));
 });
@@ -144,6 +170,7 @@ router.get('/payform', function(req, res){
 });
 
 router.get('/signIn', function(req, res){
+    req.session.rols = "Logged";
     res.render('../src/views/sign-in.ejs');
     //res.sendFile(path.join(__dirname, '../src/views/index.ejs'));
 });
@@ -183,27 +210,7 @@ router.get('/admin', function(req, res){
     res.render('../src/views/admin.ejs');
 });
 
-router.post('/save-game', function(req, res){
-    console.log('parametros:');
-    console.log(req.query);
-    console.log(req.body);
 
-     var newGame = new Game
-    ({
-        title: 'Silence',
-        platform: 'XBOX-ONE',
-        price: 10
-    });
-
-    newGame.img.data = req.body.pic;
-    newGame.img.contentType = 'image/png';
-
-   newGame.save(function (err, fluffy) {
-      if (err) return console.error(err);
-    });
-
-    res.render('../src/views/admin.ejs');
-});
 
 router.route('/book')
   .get(function (req, res) {
@@ -260,5 +267,100 @@ router.get('/form', function (req, res) {
         });
     });
 
-export default {};
+
+
+ var Storage = multer.diskStorage({
+     destination: function(req, file, callback) {
+        file.originalname = util.renameImage(file.originalname, req.body.gameName);
+        console.log(file.originalname);
+        let imgPath = path.join(__dirname, '../src/images/', req.body.gameConsole);
+
+         fs.exists(imgPath, exist => {
+             console.log("Existe: " + exist);
+             if (!exist){
+                fs.mkdir(imgPath , err => { 
+                    if (err) 
+                        console.log(err);
+                });
+             } 
+
+             var newGame = new Game ({
+                  title: req.body.gameName,
+                  platform: req.body.gameConsole,
+                  price: req.body.gamePrice,
+                  status: req.body.gameStatus,
+                  imgName: file.originalname,
+                  imgPath: path.join('/images/', req.body.gameConsole, '/'),
+                  imgFullPath: path.join('/images/', req.body.gameConsole, '/', file.originalname)
+              });
+
+              newGame.save(function (err, fluffy) {
+                if (err) return console.error(err);
+              });
+
+              callback(null, imgPath);
+         });
+     },
+     filename: function(req, file, callback) {
+         //callback(null, req.body.gameName);
+         
+         callback(null, file.originalname);
+         //callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+     }
+ });
+
+ var upload = multer({
+     storage: Storage
+ }).array("gameImg", 3); //Field name and max count
+ 
+router.post("/save-game", function(req, res) {
+ 
+     upload(req, res, function(err) {
+         if (err) {
+             return res.end("Something went wrong!" + err);
+         }
+/*
+            var newGame = new Game ({
+                title: req.body.gameName,
+                platform: req.body.gameConsole,
+                price: req.body.gamePrice,
+                status: req.body.gameStatus,
+                imgPath: path.join(__dirname, '../src/images/', req.body.gameConsole),
+                imgName: file.originalname
+            });
+
+            newGame.save(function (err, fluffy) {
+                if (err) return console.error(err);
+            });
+*/
+         return res.end("File uploaded sucessfully!.");
+     });
+ });
+
+ router.post("/save-user", function(req, res){
+    var newUser = new User ({
+                  person:{
+                      Name:{
+                        firstName: req.body.firstName,
+                        lastName: req.body.lastName
+                       },
+                       cellphone: req.body.cellphone
+                  },
+                  userName: req.body.username,
+                  email: req.body.email,
+                  password: req.body.password,
+                  status: "Activo",
+                  roles: "Cliente",
+   });
+
+   newUser.save(function (err, fluffy) {
+      if (err) return console.error(err);
+    });
+
+    res.redirect('/');
+ });
+
+export default {
+    router
+};
 module.exports = router;

@@ -1,80 +1,9 @@
-<!DOCTYPE html>
-<html>
+'user strict';
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!--Import Google Icon Font-->
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="styles.css"/>
-        <!--Let browser know website is optimized for mobile-->
-        <!-- Latest compiled and minified CSS -->
-
-  </head>
-
-  <body>
-
-    <%- include header %>
-
-
-
-<div class="container">
-	<div class="row padding-10">
-        <%- include sidebar-admin %>
-        <div class="col-md-8">
-            <div class="std padding-10">
-                <div class="cms-page">
-
-            <h2>Admin Form</h2>
-            <form>
-
-	<div class="form-group"> <!-- Name field -->
-		<label class="control-label " for="name">Username</label>
-		<input class="form-control" id="name" name="username" type="text" placeholder="Nombre"/>
-	</div>
-    <span class="help-block"></span>
-
-	<div class="form-group"> <!-- Email field -->
-		<label class="control-label requiredField" for="email">Email<span class="asteriskField">*</span></label>
-		<input class="form-control" id="email" name="email" data-validation="email" type="text" placeholder="Email"/>
-	</div>
-    <span class="help-block"></span>
-
-	<div class="form-group"> <!-- Subject field -->
-		<label class="control-label " for="password">Password</label>
-		<input class="form-control" id="new_password" name="password" data-validation="password" type="password" placeholder="Tema"/>
-	</div>
-	<span class="help-block"></span>
-
-		<div class="form-group"> <!-- Subject field -->
-		<label class="control-label " for="password">Password</label>
-		<input class="form-control" id="repeat_password" name="password" type="password" placeholder="Tema" onblur="
-            if (document.getElementById('new_password').value != document.getElementById('repeat_password').value){
-                setError(this, 'No coinciden las contraseñas');
-            }
-        "/>
-	</div>
-	<span class="help-block"></span>
-
-	<div class="form-group">
-		<button class="btn btn-primary " name="submit" type="submit" onclick="
-        if (document.getElementById('new_password').value != document.getElementById('repeat_password').value){
-                setError(this, 'No coinciden las contraseñas');
-        }
-        validateForm(); return false;">Submit</button>
-	</div>
-
-</form>
-
-            </div>
-    </div>
-
-        </div>
-    </div>
-</div>
-        <%- include footer %>
-   <script>
+    /**
+     * Rename the default uploaded file name to a related one
+     *
+     */
         function validateForm(){
             setAllError();
             var inputs = document.getElementsByTagName('input');
@@ -104,6 +33,11 @@
             }
         }
 
+    /**
+     * Validate Email Input
+     *
+     * @param input
+     */
         function validateEmail(input) {
             requiredField(input);
             var email = input.value;
@@ -218,8 +152,3 @@
             var next = input.parentNode.nextElementSibling || input.parentNode.nextSibling;
             next.innerHTML = err;
         }
-    </script>
-    <script src="bundle.js">
-        </script>
-  </body>
-</html>

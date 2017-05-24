@@ -10,8 +10,6 @@ import './js/best-seller';
 import './js/payform-validate';
 import './js/validation';*/
 
-window.$ = window.jQuery = require("jquery");
-
 import {getUsers} from './api/userApi';
 
 import './sass/main.scss';
@@ -55,3 +53,5 @@ getUsers().then( result => {
 
     global.document.getElementById('users').innerHTML = usersBody;
 });
+
+console.log("hola");

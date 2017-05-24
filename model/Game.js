@@ -4,9 +4,13 @@
       title: { type: String, trim: true},
       platform: { type: String, trim: true},
       price: { type: Number, min: 0 },
-      img: { data: Buffer, contentType: String }
+      status: { type: String, trim: true},
+     // img: { data: Buffer, contentType: String }
+      articles: {type: Number, min: 0},
+      imgPath: { type: String, trim: true},
+      imgName: { type: String, trim: true},
+      imgFullPath: { type: String, trim: true}
     });
-
     //declaration of models with respective schemas
     var Game = mongoose.model('Game', gameSchema);
 

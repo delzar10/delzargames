@@ -9,15 +9,7 @@
         <!--Import materialize.css-->
         <link type="text/css" rel="stylesheet" href="styles.css"/>
         <!--Let browser know website is optimized for mobile-->
-        <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  </head>
+</head>
 
   <body>
 
@@ -34,28 +26,35 @@
                 <h2>Console Form</h2>
             <form>
 
-		<div class="form-group"> <!-- Name field -->
+		<div class="form-group"> 
 		<label class="control-label " for="name">Nombre</label>
-		<input class="form-control" id="name" name="name" type="text" placeholder="Nombre"/>
+		<input class="form-control" id="name" name="name" data-validation="alphanum" type="text" placeholder="Nombre"/>
 	</div>
     <span class="help-block"></span>
-
-	<div class="form-group"> <!-- Email field -->
-		<label class="control-label requiredField" for="email">Vendor<span class="asteriskField">*</span></label>
-		<input class="form-control" id="vendor" name="name" type="text" placeholder="Vendor"/>
+        
+    <div class="form-group"> 
+		<label class="control-label requiredField" for="vendor">Vendor<span class="asteriskField">*</span></label>
+        <select name="vendor" id="vendor" data-validation="alphanum">
+            <% vendors.forEach(vendor => { %>
+                <option value="<%=vendor.name%>"><%=vendor.name%></option>
+              <% }); %>
+        </select>
 	</div>
     <span class="help-block"></span>
 
 	<div class="form-group"> <!-- Subject field -->
 		<label class="control-label " for="password">Price:</label>
-		<input class="form-control" id="price" name="number" type="text" placeholder="Price$"/>
+		<input class="form-control" id="password" name="password" data-validation="number" type="text" placeholder="Price$"/>
 	</div>
 	<span class="help-block"></span>
 
 		<div class="form-group"> <!-- Subject field -->
-		<label class="control-label " for="password">Estatus</label>
-		<input class="form-control" id="" name="name" type="text" placeholder="Estatus" onblur="
-        "/>
+		<label class="control-label " for="status">Estatus</label>
+        <select name="status" id="vendor" data-validation="select">
+            <% statuses.forEach( status => {
+               <option value="<=%status.name%>"><=%status.name%></option> 
+            <% }); %>
+        </select>
 	</div>
 	<span class="help-block"></span>
 
@@ -72,153 +71,8 @@
         </div>
     </div>
 </div>
-        <%- include footer %>
-   <script>
-        function validateForm(){
-            setAllError();
-            var inputs = document.getElementsByTagName('input');
 
-            for (var i = 0; i < inputs.length; i++){
-                if (inputs[i].name === 'name'){
-                    onlyLetters(inputs[i]);
-                }
-                else if (inputs[i].name === 'number'){
-                    onlyNumbers(inputs[i]);
-                }
-                else if (inputs[i].name === 'email'){
-                    validateEmail(inputs[i]);
-                }
-                else if (inputs[i].name === 'password'){
-                    requiredField(inputs[i]);
-                }
-                else if (inputs[i].name === 'username'){
-                    validateUsername(inputs[i]);
-                }
-                else if (inputs[i].name === 'alphanumeric'){
-                    alphanumeric(inputs[i]);
-                }
-                else if (inputs[i].name === 'zip'){
-                    validateZIP(inputs[i]);
-                }
-            }
-        }
-
-        function validateEmail(input) {
-            requiredField(input);
-            var email = input.value;
-            if (!email.match("/[_+a-zA-Z0-9-]+(\.[_+a-zA-Z0-9-])*@[_+a-zA-Z0-9-]+(\.([a-zA-Z]{2,}))+/i")) {
-                setError(input, 'Email incorrector');
-                return false;
-            }
-            setError(input, '');
-        }
-
-        function requiredField(input)
-        {
-            if (input.value.length == 0)
-            {
-                setError(input, 'Se requiere este campo');
-                return false;
-            }
-            setError(input, '');
-            return true;
-        }
-
-        function onlyLetters(input)
-        {
-        requiredField(input);
-
-        var letters = /^[A-Za-z]+$/;
-        if(input.value.match(letters))
-            {
-            return true;
-            }
-        else
-            {
-            setError(input, 'Solo se aceptan Letras');
-            return false;
-            }
-        }
-
-            //requiredField FIELD
-
-
-
-        function onlyNumbers(input)
-        {
-            var numbers = /^[0-9]+$/;
-            if(!input.value.match(numbers))
-            {
-            setError(input, 'Solo se aceptan numeros');
-            return false;
-            }
-        }
-
-        // Function to check letters and numbers
-        function alphanumeric(input)
-        {
-            requiredField(input);
-        var letterNumber = /^[0-9a-zA-Z]+$/;
-        if(input.value.match(letterNumber))
-        {
-        return true;
-        }
-        else
-            {
-            setError(input, 'Solo se aceptan valores alfanumericos');
-            return false;
-            }
-        }
-
-        function validateUsername(input){
-            requiredField(input);
-
-            var usernameRegex = /^[a-zA-Z0-9]+$/;
-            if(input.value.match(usernameRegex)) {
-               return true;
-            }  else {
-                setError(input, 'Solo se aceptan valores de Usuario, Primero letras');
-                return false;
-            }
-        }
-
-        function lengthRange(input, minlength, maxlength)
-        {
-        var userInput = input.value;
-        if(userInput.length >= minlength && userInput.length <= maxlength)
-            {
-                return true;
-            }
-        else
-            {
-            setError(input, "Por favor ingresa un valor entre " +minlength+ " y " +maxlength);
-                return false;
-            }
-        }
-
-        function validateZIP(input){
-            onlyNumbers(input);
-
-            if (input.value.length != 5){
-                setError(input, 'El tamaño del codigo debe ser de 5 numeros');
-                return false;
-            }
-        }
-
-        function setAllError(){
-            var elems = document.getElementsByClassName("help-block");
-
-            for (var i = 0; i < elems.length; i++){
-                elems[i].innerHTML = "";
-            }
-        }
-
-        function setError(input, err){
-            var next = input.parentNode.nextElementSibling || input.parentNode.nextSibling;
-            next.innerHTML = err;
-        }
-    </script>
-    <script src="bundle.js">
-        </script>
+    <%- include footer %>
+    <script src="bundle.js"></script>
   </body>
 </html>

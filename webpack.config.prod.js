@@ -215,19 +215,24 @@ export default {
         //loader: 'ejs-html-loader'
 
       },*/
-      {test: /\.js$/, loaders: ['babel'], exclude: /node_modules/},
+      {
+        test: /\.js$/, 
+        loaders: ['babel-loader'], 
+        exclude: /node_modules/},
      // {test: /\.css$/, loader: ExtractTextPlugin.extract("css?sourceMap")}, //!autoprefixer-loader
      // {test: /\.scss$/, loader: ExtractTextPlugin.extract("css?sourceMap?!sass?sourceMap")},
      {
         test: /\.(css|scss|sass)$/,  // style-loader! inject it to style tag style-loader
         loader: ExtractTextPlugin.extract("css-loader?sourceMap?!postcss-loader!sass-loader?sourceMap")
       },
-      {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader?mimetype=image/svg+xml'},
-      {test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader?mimetype=application/font-woff"},
-      {test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader?mimetype=application/font-woff"},
-      {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader?mimetype=application/octet-stream"},
-      {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader"},
-      {test:/bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/, loader: 'imports-loader?jQuery=jquery' }
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        loader: 'file-loader'
+      },
+      {
+        test:/bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/, 
+        loader: 'imports-loader?jQuery=jquery' 
+      }
     ]
   }
 }
