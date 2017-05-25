@@ -220,6 +220,10 @@ export default {
         //loader: 'ejs-html-loader'
 
       },*/
+      { 
+        test: require.resolve("jquery"), 
+        loader: "expose-loader?$!expose-loader?jQuery" 
+      },
       {
         test: /\.js$/, 
         loaders: ['babel-loader'], 
