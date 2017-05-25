@@ -18,7 +18,7 @@ export default {
     path: path.resolve(__dirname, 'dist'), //Create something in memory y se lo pasa al navegador
     publicPath: '/', // Simula los archivos
     //filename: 'views/[name].[chunkhash].js' // Simula los archivos
-    filename: 'views/[name].[chunkhash].js' // Simula los archivos
+    filename: '[name].[chunkhash].js' // Simula los archivos
   },
   plugins: [
     /*new webpack.optimize.CommonsChunkPlugin({
@@ -180,8 +180,8 @@ export default {
       }*/
     }),
     new WebpackMd5Hash(), // Cache Busting solo descarga cuando haya cambios
-    new webpack.optimize.DedupePlugin(), // Elimina Duplicados
-    new webpack.optimize.UglifyJsPlugin(), // Minimiza el tamaño
+    //new webpack.optimize.DedupePlugin(), // Elimina Duplicados
+   // new webpack.optimize.UglifyJsPlugin(), // Minimiza el tamaño
     new ExtractTextPlugin('[name].[contenthash].css') //allChunks: true  // webpack v2 )], //catching error, hot reloading, linting
   ],
   module: { // file types wanna to handle
