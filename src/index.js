@@ -35,7 +35,7 @@ function requireAll(requireContext) {
 //var modules = requireAll(require.context("./images/", true, /^\.\/.*\.(gif|png|jpe?g|svg)$/));
 
 
-global.users = getUsers();
+/*global.users = getUsers();
 
 getUsers().then( result => {
     console.log(`I entered getUsers`);
@@ -53,5 +53,5 @@ getUsers().then( result => {
 
     global.document.getElementById('users').innerHTML = usersBody;
 });
-
+*/
 console.log("hola");

@@ -33,7 +33,12 @@
                 </a>
             </div>
             <div class="col-sm-1">
-                 <%- include user-loggout -%>
+
+                 <% if (typeof user === 'undefined') { %>
+                    <%- include user-loggout %>
+                <% } else {  %>
+                    <%- include user-logged %>
+                <% } %>
             </div>
         </div>
         <div class="row row1">

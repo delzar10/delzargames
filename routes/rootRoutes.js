@@ -143,7 +143,7 @@ router.get('/new-console', function(req, res){
         console.log(vendors);
         const statuses = await ArticleStatus.find({});
         console.log(statuses);
-        return {vendors, statuses};   
+        return {vendors, statuses};
     }
     console.log("Entre la funcion ASYNC");
     queryResult().then( results =>{
@@ -152,14 +152,14 @@ router.get('/new-console', function(req, res){
         console.log(results);
         return res.render(path.join(__dirname, '../src/views/console-form.ejs', {vendors:results[0], statuses:results[1]}));
     })
-    
+
 });
 
 
 
 
 router.get('/contact', function(req, res){
-      
+
     res.render('../src/views/contact.ejs');
     //res.sendFile(path.join(__dirname, '../src/views/index.ejs'));
 });
@@ -170,14 +170,47 @@ router.get('/payform', function(req, res){
 });
 
 router.get('/signIn', function(req, res){
-    req.session.rols = "Logged";
+
+
+
+    if (typeof req.app.locals.user !== 'undefined') {
+        console.log("Entro a Normal");
+        console.log(typeof req.app.locals.user);
+        console.log(req.app.locals.user);
+        console.log(typeof req.app.locals.user.userName);
+         console.log(req.app.locals.user.username);
+        if ( typeof req.app.locals.user.userName !== 'undefined'){
+            console.log("Entro a redirigir");
+            console.log(typeof req.app.locals.user.userName);
+            return res.redirect('/account');
+         }
+    }
     res.render('../src/views/sign-in.ejs');
     //res.sendFile(path.join(__dirname, '../src/views/index.ejs'));
 });
 
+router.post('/loggin', function(req, res){
+    User.find({userName: req.body.username, password: req.body.password}).limit(1).exec().then(result =>{
+        console.log(result);
+        req.session.user = result;
+        req.app.locals.user = result;
+        console.log("Resultado:" + result);
+        res.render('../src/views/account.ejs');
+    });
+});
+
 router.get('/signUp', function(req, res){
+    if (typeof req.app.locals.user !== 'undefined'
+    &&  typeof req.app.locals.user.userName !== 'undefined'){
+        res.redirect('/index');
+    }
+
     res.render('../src/views/sign-up.ejs');
     //res.sendFile(path.join(__dirname, '../src/views/index.ejs'));
+});
+
+router.get('/welcome', function(req, res){
+
 });
 
 router.get('/credit', function(req, res){
@@ -191,7 +224,7 @@ router.get('/cart', function(req, res){
 });
 
 router.get('/account', function(req, res){
-    res.render('../src/views/account.ejs');
+    res.render('../src/vi ews/account.ejs');
 });
 
 router.get('/user-form', function(req, res){
@@ -278,11 +311,11 @@ router.get('/form', function (req, res) {
          fs.exists(imgPath, exist => {
              console.log("Existe: " + exist);
              if (!exist){
-                fs.mkdir(imgPath , err => { 
-                    if (err) 
+                fs.mkdir(imgPath , err => {
+                    if (err)
                         console.log(err);
                 });
-             } 
+             }
 
              var newGame = new Game ({
                   title: req.body.gameName,
@@ -303,7 +336,7 @@ router.get('/form', function (req, res) {
      },
      filename: function(req, file, callback) {
          //callback(null, req.body.gameName);
-         
+
          callback(null, file.originalname);
          //callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
      }
@@ -312,9 +345,9 @@ router.get('/form', function (req, res) {
  var upload = multer({
      storage: Storage
  }).array("gameImg", 3); //Field name and max count
- 
+
 router.post("/save-game", function(req, res) {
- 
+
      upload(req, res, function(err) {
          if (err) {
              return res.end("Something went wrong!" + err);
@@ -357,7 +390,9 @@ router.post("/save-game", function(req, res) {
       if (err) return console.error(err);
     });
 
-    res.redirect('/');
+    req.app.locals.user = newUser;
+
+    res.render('../src/views/credit-card.ejs');
  });
 
 export default {

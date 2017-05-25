@@ -14,11 +14,13 @@
           cellphone: {type: Number},
           telephone: {type: Number},
         },
-        userName: {type: String, trim: true},
+        username: {type: String, trim: true},
         email: {type: String, trim: true},
         password: {type: String, trim:true, },
         status: {type: String, trim: true},
-        roles: {type: String, trim: true},
+        roles: {
+            name: [{type: String, trim: true}]
+        },
         creditCard: [{
           cardType: {type: String},
           cardNumber: {type: Number},
