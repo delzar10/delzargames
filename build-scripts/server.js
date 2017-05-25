@@ -46,7 +46,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 // Engine view EJS
 //app.use(express.static('public'));
-app.use(helmet());
+//app.use(helmet());
 app.use(express.static('src'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
