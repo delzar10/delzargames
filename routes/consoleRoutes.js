@@ -6,6 +6,27 @@ var router = express.Router();
 
 router.route('/Console');
 
+router.param('name', function(req, res, next, name) {
+    // do validation on name here
+    // blah blah validation
+    // log something so we know its working
+    console.log('doing name validations on ' + name);
+
+    // once validation is done save the new item in the req
+    req.name = name;
+    // go to the next thing
+    next(); 
+});
+
+router.get('/:name', function(req, res) {
+
+     Game.find({ platform: req.name }).limit(12).exec(function (err, games) {
+          if (err) return console.error(err);
+          res.render('../src/views/console-gallery.ejs', {games: games, console: req.name});
+     });
+});
+
+/*
 router.get('/PS3', function(req, res, next) {
 
      Game.find({ platform: 'PS3' }).limit(12).exec(function (err, games) {
@@ -55,6 +76,7 @@ router.get('/SWITCH', function(req, res, next) {
           res.render('../src/views/console-gallery.ejs', {games: games, console: 'SWITCH'});
      });
 });
+*/
 
 export default {};
 module.exports = router;

@@ -6,8 +6,23 @@
         <!--Import Google Icon Font-->
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="styles.css"/>
+        <link type="text/css" rel="stylesheet" href="../styles.css"/>
+
         <!--Let browser know website is optimized for mobile-->
+        <script src="../vendor.js"></script>
+                    <script>
+
+                // pre-submit callback
+                function showRequest(formData, jqForm, options) {
+                    alert('Uploading is starting.');
+                    return true;
+                }
+
+                // post-submit callback
+                function showResponse(responseText, statusText, xhr, $form) {
+                    alert('status: ' + statusText + '\n\nresponseText: \n' + responseText );
+                }
+        </script>
  </head>
 
   <body>
@@ -16,17 +31,17 @@
 
       <div class="container padding-top-10">
         <div class="row">
-          <div class="col-sm-6">
-            <img src="https://media.redadn.es/imagenes/call-of-duty-black-ops-3_260233.jpg" class="img-responsive">
+          <div class="col-xs-4">
+            <img src="<%=game.imgFullPath%>" class="img-responsive">
           </div>
           <div class="col-sm-6" style="border:0px solid gray">
                     <!-- Datos del vendedor y titulo del producto -->
-                    <h3>GameName</h3>
-                    <h5 style="color:#337ab7"><a href="#">MICROSOFT</a> · <small style="color:#337ab7">selled</small></h5>
+                    <h3><%=game.title%></h3>
+                    <h5 style="color:#337ab7"><a href="#"><%=game.platform%></a> · <small style="color:#337ab7">selled</small></h5>
 
                     <!-- Precios -->
                     <h6 class="title-price"><small>PRECIO OFERTA</small></h6>
-                    <h3 style="margin-top:0px;">U$S 399</h3>
+                    <h3 style="margin-top:0px;">U$S <%=game.price%></h3>
 
                     <!-- Detalles especificos del producto -->
                     <div class="section" style="padding-bottom:5px;">
@@ -47,7 +62,15 @@
 
                     <!-- Botones de compra -->
                     <div class="section" style="padding-bottom:20px;">
-                        <button class="btn btn-success" onclick="
+                        <button class="btn btn-success" onclick=" 
+                            $.ajax({
+							    async: true,
+								url:'/add-cart/<%=game._id%>/' + Number(document.getElementById('cantidad').value), 
+								success: function showResponse(responseText, statusText, xhr) {
+                                            alert('status: ' + statusText + '\n\nresponseText: \n' + responseText );
+                                        }
+							});
+
                             document.getElementById('selected-items').innerHTML = Number(document.getElementById('selected-items').innerHTML) + Number(document.getElementById('cantidad').value);
 
                         "><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Agregar al carro</button>
@@ -77,6 +100,9 @@
                 </div>
         </div>
       </div>
+
+    <%- include footer %>
+
 
     <script>
             $("ul.menu-items > li").on("click",function(){
@@ -110,8 +136,6 @@
                 }
             });
     </script>
-    <%- include footer %>
-
-    <script src="main.js"></script>
+    <script src="../main.js"></script>
   </body>
 </html>

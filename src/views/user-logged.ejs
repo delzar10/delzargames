@@ -1,8 +1,8 @@
  <span class="smallnav menu">
     <%  %>
- <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-circle-o" aria-hidden="true"></i><%=user.address%> <b class="caret"></b></a>
+ <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-circle-o" aria-hidden="true"></i><%if (user[0]) { %> <%=user[0].username%> <% } %> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Profile</a></li>
+                        <li><a href="/account">Profile</a></li>
                         <li><a href="#">Settings</a></li>
                         <li class="divider"></li>
                         <li><a href="#">Logout</a></li>
@@ -12,13 +12,13 @@
 
   <span class="largenav">
  <li class="dropdown"><a href="/signIn" class="dropdown-toggle" data-toggle="dropdown">
-     <i class="fa fa-user-circle-o" aria-hidden="true"></i> <%=user.address%> <b class="caret"></b></a>
+     <i class="fa fa-user-circle-o" aria-hidden="true"></i> <%if (user[0]) { %> <%=user[0].username%> <% } %> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Profile</a></li>
+                        <li><a href="/account">Profile</a></li>
+                        <li><a href="/orders">Orders</a></li>
                         <li><a href="#"></span>Settings</a></li>
                         <li class="divider"></li>
                         <li><a href="/logout">Logout</a></li>
                     </ul>
 </li>
  </span>
-}

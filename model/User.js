@@ -25,18 +25,15 @@
           cardType: {type: String},
           cardNumber: {type: Number},
           cardCode: {type: Number}
-        }]
-    });
-
-    var userStatusSchema = new mongoose.Schema({
-      name: { type: String, trim: true},
+        }],
+        imgPath: { type: String, trim: true},
+        imgName: { type: String, trim: true},
+        imgFullPath: { type: String, trim: true}
     });
 
     //declaration of models with respective schemas
     var User = mongoose.model('User', userSchema);
-    var UserStatus = mongoose.model('UserStatus', userStatusSchema);
 
     module.exports={
-     User:User,
-     UserStatus:UserStatus
+     User:User
     }

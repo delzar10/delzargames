@@ -10,7 +10,7 @@ import consoleRouter from '../routes/consoleRoutes';
 import mongoose from 'mongoose';
 import session from 'express-session';
 import helmet from 'helmet';
-import {Game} from '../model/Game';
+
 
 let url = "mongodb://delzar:DELzar_10@ds137110.mlab.com:37110/delzar-games";
 //let url = "mongodb://localhost/mydb";
@@ -61,6 +61,8 @@ app.set('trust proxy', 1);
 app.set('views', 'src');
 app.set('view engine', 'ejs');
 
+
+app.use('/**', isAuthenticated);
 app.use('/', rootRouter);
 app.use('/Books', bookRouter);
 app.use('/Console', consoleRouter);
@@ -114,36 +116,27 @@ app.use(function setUser(req, res, next){
 
 
 
-
 // Access the session as req.session
-app.use(function isAuthenticated(req, res, next) {
+function isAuthenticated(req, res, next) {
   var user = req.session.user;
-
+  console.log("entro: " + req.session); 
   console.log("Session: " + req.session);
 
-  if (typeof(user) === 'undefined'){
-      if (req.session.maxAge == 0){
-        return res.redirect('/index');
-      }
+  if (user){
+      if (req.url.indexOf('sign') != -1
+      ||  req.url.indexOf('log')  != -1)
+        return res.redirect('/account');
+  }
+
+  if (!user){
+      if (req.url.indexOf('sign') != -1
+      &&  req.url.indexOf('log')  != -1
+      &&  req.url.indexOf('index') != -1)
+        return res.redirect('/signIn');
   }
 
   return next();
-});
-
-
-app.get('/hola', function(req, res, next) {
-  var sess = req.session
-  if (sess.views) {
-    sess.views++
-    res.setHeader('Content-Type', 'text/html')
-    res.write('<p>views: ' + sess.views + '</p>')
-    res.write('<p>expires in: ' + (sess.cookie.maxAge / 1000) + 's</p>')
-    res.end()
-  } else {
-    sess.views = 1
-    res.end('welcome to the session demo. refresh!')
-  }
-})
+}
 
 
 // Excepciones a la regla de no console en este archivo:
@@ -156,10 +149,7 @@ app.listen(app.get('port'), function(err){
         console.log("delzar-games is running...");
     }
 
-    Game.find({}).exec().then(result => {
-        console.log("bestArticles: " + result);
-        app.locals.bestArticles = result;
-    })
+    app.locals.cart = [];
 });
 
 export default {};

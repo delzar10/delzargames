@@ -1,0 +1,58 @@
+
+	<table id="cart" class="table table-hover table-condensed">
+    				<thead>
+						<tr>
+							<th style="width:50%">Product</th>
+							<th style="width:10%">Price</th>
+							<th style="width:8%">Quantity</th>
+							<th style="width:22%" class="text-center">Subtotal</th>
+							<th style="width:10%"></th>
+						</tr>
+					</thead>
+					<tbody>
+
+                    <% if (cart) { %>
+
+						<% var totalPrice = 0; %>
+						
+						<% cart.forEach(game =>{ %>
+							<%=game[0]%>
+						<tr>
+							<td data-th="Product">
+								<div class="row">
+									<div class="col-sm-2 hidden-xs"><img src="<%=game.imgFullPath%>" alt="..." class="img-responsive"/></div>
+									<div class="col-sm-10">
+										<h4 class="nomargin"><%=game.title%></h4>
+										<p>Excelente juego</p>
+									</div>
+								</div>
+							</td>
+							<td data-th="Price"><%=game.price%></td>
+							<td data-th="Quantity">
+								<input type="number" class="form-control text-center" value="1">
+							</td>
+							<td data-th="Subtotal" class="text-center"><%=game.title%></td>
+							<td class="actions" data-th="">
+								<button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+								<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+							</td>
+						</tr>
+
+                            <%totalPrice += game.price%><%=totalPrice%>
+						<% }) %>
+                        
+
+                        <%  } %>
+                    </tbody>
+					<tfoot>
+						<tr class="visible-xs">
+							<td class="text-center"><strong></strong></td>
+						</tr>
+						<tr>
+							<td><a href="/index" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+							<td colspan="2" class="hidden-xs"></td>
+							<td class="hidden-xs text-center"><strong><%=totalPrice%></strong></td>
+							<td><a href="/credit" class="btn btn-success btn-block">Buy <i class="fa fa-angle-right"></i></a></td>
+						</tr>
+					</tfoot>
+				</table>

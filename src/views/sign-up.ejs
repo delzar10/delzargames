@@ -57,40 +57,40 @@
 
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                        <input  type="password" class="form-control" name="password" placeholder="Password" onblur="requiredField(this);">
+                        <input  type="password" class="form-control" name="password" data-validation="password" placeholder="Password" onblur="requiredField(this);">
                     </div>
 
                     <span class="help-block"></span>
 
                     <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            <input size="60" maxlength="255" class="form-control" placeholder="First Name" name="firstname" id="UserRegistration_fname" type="text" onblur="requiredField(this)">
+                            <input size="60" maxlength="255" class="form-control" placeholder="First Name" name="firstname" data-validation="name" id="UserRegistration_fname" type="text" onblur="requiredField(this)">
                     </div>
 
                     <span class="help-block"></span>
 
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        <input size="60" maxlength="255" class="form-control" placeholder="Last Name" name="lastname" id="UserRegistration_lname" type="text" onblur="requiredField(this)">
+                        <input size="60" maxlength="255" class="form-control" placeholder="Last Name" name="lastname" id="UserRegistration_lname" data-validation="name" type="text" onblur="requiredField(this)">
                     </div>
 
                     <span class="help-block"></span>
 
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon fa fa-envelope "></i></span>
-                        <input size="60" maxlength="255" class="form-control" placeholder="Address" name="email" id="UserRegistration_address" type="text" onblur="requiredField(this)">
+                        <input size="60" maxlength="255" class="form-control" placeholder="Address" name="email" data-validation="email" id="UserRegistration_address" type="text" onblur="requiredField(this)">
                      </div>
 
                      <span class="help-block"></span>
 
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon fa fa-mobile"></i></span>
-                        <input size="60" maxlength="255" class="form-control" placeholder="Contact Number" name="cellphone" id="UserRegistration_contactnumber" type="text" onblur="requiredField(this)">
+                        <input size="60" maxlength="255" class="form-control" placeholder="Contact Number" name="cellphone" data-validation="number" id="UserRegistration_contactnumber" type="text" onblur="requiredField(this)">
                      </div>
 
                     <span class="help-block"></span>
 
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="">Sign Up</button>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit" onsubmit="validateForm">Sign Up</button>
                 </form>
             </div>
         </div>

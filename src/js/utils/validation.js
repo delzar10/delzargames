@@ -9,25 +9,25 @@
             var inputs = document.getElementsByTagName('input');
 
             for (var i = 0; i < inputs.length; i++){
-                if (inputs[i].name === 'name'){
+                if (inputs[i].getAttribute('data-validation') === 'name'){
                     onlyLetters(inputs[i]);
                 }
-                else if (inputs[i].name === 'number'){
+                else if (inputs[i].getAttribute('data-validation') === 'number'){
                     onlyNumbers(inputs[i]);
                 }
-                else if (inputs[i].name === 'email'){
+                else if (inputs[i].getAttribute('data-validation') === 'email'){
                     validateEmail(inputs[i]);
                 }
-                else if (inputs[i].name === 'password'){
+                else if (inputs[i].getAttribute('data-validation') === 'password'){
                     requiredField(inputs[i]);
                 }
-                else if (inputs[i].name === 'username'){
+                else if (inputs[i].getAttribute('data-validation') === 'username'){
                     validateUsername(inputs[i]);
                 }
-                else if (inputs[i].name === 'alphanumeric'){
+                else if (inputs[i].getAttribute('data-validation') === 'alphanumeric'){
                     alphanumeric(inputs[i]);
                 }
-                else if (inputs[i].name === 'zip'){
+                else if (inputs[i].getAttribute('data-validation') === 'zip'){
                     validateZIP(inputs[i]);
                 }
             }

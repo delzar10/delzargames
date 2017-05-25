@@ -8,6 +8,7 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import Util from '../src/js/utils/util'
+import mongoose from 'mongoose';
 
 const util = new Util();
 
@@ -23,31 +24,10 @@ router.get('/', function(req, res){
 
 router.get('/index', function(req, res){
 
-/*
-    res.setHeader('Content-Type', 'text/html');
-    res.setHeader('X-Foo', 'bar');
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end('ok');
-
-    var newGame = new Game
-    ({
-        title: 'Silence',
-        platform: 'XBOX-ONE',
-        price: 10,
-        a.img.data = fs.readFileSync(imgPath);
-        a.img.contentType = 'image/png';
+    Game.find({}).exec().then(result => {
+        console.log("bestArticles: " + result);
+        req.app.locals.bestArticles = result;
     });
-
-    newGame.save(function (err, fluffy) {
-      if (err) return console.error(err);
-    });
-
-*/
-    /*Game.find(function (err, games) {
-      if (err) return console.error(err);
-      return res.render('../src/views/index.ejs', {games: games});
-    });
-    */
 
     Game.find({ platform: 'PS3' }).limit(4).exec().then(
         function (ps3Games){
@@ -93,23 +73,18 @@ router.get('/index', function(req, res){
       console.log(err);
     });
 
-    //res.render('../src/views/index.ejs');
-    //res.sendFile(path.join(__dirname, '../src/views/index.html'));
-});
-
-router.get('/game', function(req, res){
-    res.render('../src/views/game-detail.ejs');
-    //res.sendFile(path.join(__dirname, '../src/views/index.ejs'));
 });
 
 router.get('/users', function(req, res){
-    res.render('../src/views/users.ejs');
-    //res.sendFile(path.join(__dirname, '../src/views/index.ejs'));
+    User.find({}, (err, users) => {
+        res.render('../src/views/users.ejs', {users: users});
+    });
 });
 
 router.get('/consoles', function(req, res){
-    res.render('../src/views/consoles.ejs');
-    //res.sendFile(path.join(__dirname, '../src/views/index.ejs'));
+    Console.find({}, (err, consoles) => {
+        res.render('../src/views/consoles.ejs', {consoles: consoles});
+    });
 });
 
 router.get('/games', function(req, res){
@@ -118,26 +93,50 @@ router.get('/games', function(req, res){
         if (err) return console.error(err);
         res.render('../src/views/games.ejs', {games: games});
     });
-    //res.sendFile(path.join(__dirname, '../src/views/index.ejs'));
+    
 });
 
 router.get('/consoles', function(req, res){
     res.render('../src/views/consoles.ejs');
-    //res.sendFile(path.join(__dirname, '../src/views/index.ejs'));
+    
 });
 
-router.get('/new-admin', function(req, res){
+router.route('/new-admin')
+.get(function(req, res){
     res.render('../src/views/admin-form.ejs');
-    //res.sendFile(path.join(__dirname, '../src/views/index.ejs'));
+})
+.post(function(req, res){
+    adminUpload(req, res, err =>{
+        if (err) {
+            return res.end("Something went wrong!" + err);
+        }
+        return res.end("Admin register sucessfully!.");
+         });
 });
 
-router.get('/new-game', function(req, res){
+
+router.route('/new-game')
+.get(function(req, res){
     res.render('../src/views/game-form.ejs');
-    //res.sendFile(path.join(__dirname, '../src/views/index.ejs'));
-});
+})
+.post(function(req, res){
+    gameUpload(req, res, function(err) {
+        if (err) {
+            return res.end("Something went wrong!" + err);
+        }
+        return res.end("File uploaded sucessfully!.");
+     });
+})
+.put(function(req, res){
+    res.render('../src/views/game-form.ejs');
+})
+.delete(function(req, res){
+    res.render('../src/views/game-form.ejs');
+})
 
-router.get('/new-console', function(req, res){
-    async function queryResult(){
+router.route('/new-console')
+.get(function(req, res){
+    /*async function queryResult(){
         console.log("Hola DESDE METODO ASYNC");
         const vendors = await Vendor.find({});
         console.log(vendors);
@@ -145,14 +144,19 @@ router.get('/new-console', function(req, res){
         console.log(statuses);
         return {vendors, statuses};
     }
-    console.log("Entre la funcion ASYNC");
+    
     queryResult().then( results =>{
-        console.log("DENTRO DE LO ULTIMO la funcion ASYNC");
-        console.log("Resultados: ");
-        console.log(results);
-        return res.render(path.join(__dirname, '../src/views/console-form.ejs', {vendors:results[0], statuses:results[1]}));
-    })
-
+        
+    })*/
+    return res.render(path.join(__dirname, '../src/views/console-form.ejs'));
+})
+.post(function(req, res){
+     consoleUpload(req, res, function(err) {
+        if (err) {
+            return res.end("Something went wrong!" + err);
+        }
+        return res.end("File uploaded sucessfully!.");
+     });
 });
 
 
@@ -161,12 +165,12 @@ router.get('/new-console', function(req, res){
 router.get('/contact', function(req, res){
 
     res.render('../src/views/contact.ejs');
-    //res.sendFile(path.join(__dirname, '../src/views/index.ejs'));
+    
 });
 
 router.get('/payform', function(req, res){
     res.render('../src/views/payform.ejs');
-    //res.sendFile(path.join(__dirname, '../src/views/index.ejs'));
+    
 });
 
 router.get('/signIn', function(req, res){
@@ -177,20 +181,20 @@ router.get('/signIn', function(req, res){
         console.log("Entro a Normal");
         console.log(typeof req.app.locals.user);
         console.log(req.app.locals.user);
-        console.log(typeof req.app.locals.user.userName);
+        console.log(typeof req.app.locals.user.username);
          console.log(req.app.locals.user.username);
-        if ( typeof req.app.locals.user.userName !== 'undefined'){
+        if ( typeof req.app.locals.user.username !== 'undefined'){
             console.log("Entro a redirigir");
             console.log(typeof req.app.locals.user.userName);
             return res.redirect('/account');
          }
     }
     res.render('../src/views/sign-in.ejs');
-    //res.sendFile(path.join(__dirname, '../src/views/index.ejs'));
+    
 });
 
-router.post('/loggin', function(req, res){
-    User.find({userName: req.body.username, password: req.body.password}).limit(1).exec().then(result =>{
+router.post('/login', function(req, res){
+    User.find({username: req.body.username, password: req.body.password}).limit(1).exec().then(result =>{
         console.log(result);
         req.session.user = result;
         req.app.locals.user = result;
@@ -206,7 +210,7 @@ router.get('/signUp', function(req, res){
     }
 
     res.render('../src/views/sign-up.ejs');
-    //res.sendFile(path.join(__dirname, '../src/views/index.ejs'));
+    
 });
 
 router.get('/welcome', function(req, res){
@@ -215,16 +219,16 @@ router.get('/welcome', function(req, res){
 
 router.get('/credit', function(req, res){
     res.render('../src/views/credit-card.ejs');
-    //res.sendFile(path.join(__dirname, '../src/views/index.ejs'));
+    
 });
 
 router.get('/cart', function(req, res){
     res.render('../src/views/cart.ejs');
-    //res.sendFile(path.join(__dirname, '../src/views/index.ejs'));
+    
 });
 
 router.get('/account', function(req, res){
-    res.render('../src/vi ews/account.ejs');
+    res.render('../src/views/account.ejs');
 });
 
 router.get('/user-form', function(req, res){
@@ -243,18 +247,45 @@ router.get('/admin', function(req, res){
     res.render('../src/views/admin.ejs');
 });
 
+router.get('/faqs', function(req, res){
+    res.render('../src/views/faqs.ejs');
+});
+
+router.param('username', function(req, res, next, username) {
+    console.log('doing name validations on ' + username);
+
+    // once validation is done save the new item in the req
+    req.username = username;
+    // go to the next thing
+    next(); 
+});
 
 
-router.route('/book')
-  .get(function (req, res) {
-    res.send('Get a random book')
-  })
-  .post(function (req, res) {
-    res.send('Add a book')
-  })
-  .put(function (req, res) {
-    res.send('Update the book')
-  });
+router.get('/delete-user/:username', function(req, res){
+    User.find({username: req.username}).remove( err => {
+        if (err) console.log(err);
+    })
+
+    res.end("Usuario: " + req.username + " fue correctamente Borrado");
+});
+
+
+router.get('/delete-game/:id', function(req, res){
+    Game.find({_id: req.params.id}).remove( err => {
+        if (err) console.log(err);
+    })
+    
+    res.end("Game: " + req.params.id + " fue correctamente Borrado");
+});
+
+
+router.get('/delete-console/:id', function(req, res){
+    Console.find({_id: req.params.id}).remove( err => {
+        if (err) console.log(err);
+    })
+    
+    res.end("Consola: " + req.params.id + " fue correctamente Borrado");
+});
 
 // a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
 router.use('/user/:id', function(req, res, next) {
@@ -300,12 +331,57 @@ router.get('/form', function (req, res) {
         });
     });
 
+ router.post("/save-user", function(req, res){
+    var newUser = new User ({
+                  person:{
+                      Name:{
+                        firstName: req.body.firstName,
+                        lastName: req.body.lastName
+                       },
+                       cellphone: req.body.cellphone
+                  },
+                  username: req.body.username,
+                  email: req.body.email,
+                  password: req.body.password,
+                  status: "Activo",
+                  roles: "Cliente",
+   });
 
+   newUser.save(function (err, fluffy) {
+      if (err) return console.error(err);
+    });
 
- var Storage = multer.diskStorage({
+    req.app.locals.user = newUser;
+
+    res.render('../src/views/credit-card.ejs');
+ });
+
+ router.get("/logout", (req, res) => {
+     req.app.locals.user = undefined;
+     req.session.destroy();
+     res.redirect("/index");
+ })
+
+ router.get('/game/:id', function(req, res, next){
+     Game.findById(req.params.id, (err, game) =>{
+         if (err) console.log(err);
+         res.render('../src/views/game-detail.ejs', {game: game});
+     })
+ })
+
+ router.get('/add-cart/:id/:size', function(req, res, next){
+        Game.findById(req.params.id, (err, result) =>{
+            if (err) console.log(err);
+            console.log(result[0]);
+            req.app.locals.cart.push(result);
+            console.log(req.app.locals.cart);
+            res.end("Has agregado " + result.title + " Al carrito ");
+        })
+ });
+
+  var gameStorage = multer.diskStorage({
      destination: function(req, file, callback) {
         file.originalname = util.renameImage(file.originalname, req.body.gameName);
-        console.log(file.originalname);
         let imgPath = path.join(__dirname, '../src/images/', req.body.gameConsole);
 
          fs.exists(imgPath, exist => {
@@ -327,7 +403,7 @@ router.get('/form', function (req, res) {
                   imgFullPath: path.join('/images/', req.body.gameConsole, '/', file.originalname)
               });
 
-              newGame.save(function (err, fluffy) {
+              newGame.save(function (err, game) {
                 if (err) return console.error(err);
               });
 
@@ -342,64 +418,102 @@ router.get('/form', function (req, res) {
      }
  });
 
- var upload = multer({
-     storage: Storage
+ var gameUpload = multer({
+     storage: gameStorage
  }).array("gameImg", 3); //Field name and max count
 
-router.post("/save-game", function(req, res) {
 
-     upload(req, res, function(err) {
-         if (err) {
-             return res.end("Something went wrong!" + err);
-         }
-/*
-            var newGame = new Game ({
-                title: req.body.gameName,
-                platform: req.body.gameConsole,
-                price: req.body.gamePrice,
-                status: req.body.gameStatus,
-                imgPath: path.join(__dirname, '../src/images/', req.body.gameConsole),
-                imgName: file.originalname
+var consoleStorage = multer.diskStorage({
+     destination: function(req, file, callback) {
+        file.originalname = util.renameImage(file.originalname, req.body.name);
+        let imgPath = path.join(__dirname, '../src/images/consoles/');
+
+         fs.exists(imgPath, exist => {
+             if (!exist){
+                fs.mkdir(imgPath , err => {
+                    if (err)
+                        console.log(err);
+                });
+             }
+
+            var newConsole = new Console({
+                name: req.body.name,
+                vendor: req.body.vendor,
+                price: req.body.price,
+                status: req.body.status,
+                imgName: file.originalname,
+                imgPath: path.join('/images/consoles/'),
+                imgFullPath: path.join('/images/consoles/', file.originalname)
             });
 
-            newGame.save(function (err, fluffy) {
+              newConsole.save(function (err, game) {
                 if (err) return console.error(err);
-            });
-*/
-         return res.end("File uploaded sucessfully!.");
-     });
+              });
+
+              callback(null, imgPath);
+         });
+     },
+     filename: function(req, file, callback) {
+         //callback(null, req.body.gameName);
+
+         callback(null, file.originalname);
+         //callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+     }
  });
 
- router.post("/save-user", function(req, res){
-    var newUser = new User ({
-                  person:{
-                      Name:{
-                        firstName: req.body.firstName,
-                        lastName: req.body.lastName
-                       },
-                       cellphone: req.body.cellphone
-                  },
-                  userName: req.body.username,
-                  email: req.body.email,
-                  password: req.body.password,
-                  status: "Activo",
-                  roles: "Cliente",
-   });
+ var consoleUpload = multer({
+     storage: consoleStorage
+ }).array("gameImg", 3); //Field name and max count
 
-   newUser.save(function (err, fluffy) {
-      if (err) return console.error(err);
-    });
 
-    req.app.locals.user = newUser;
+ var adminStorage = multer.diskStorage({
+     destination: function(req, file, callback) {
+        file.originalname = util.renameImage(file.originalname, req.body.username);
+        let imgPath = path.join(__dirname, '../src/images/admins/');
 
-    res.render('../src/views/credit-card.ejs');
+         fs.exists(imgPath, exist => {
+             if (!exist){
+                fs.mkdir(imgPath , err => {
+                    if (err)
+                        console.log(err);
+                });
+             }
+
+                console.log(req.body.username);
+
+                  var newUser = new User ({
+                    username: req.body.username,
+                    email: req.body.email,
+                    password: req.body.password,
+                    status: "Activo",
+                    roles: "Admin",
+                    imgName: file.originalname,
+                    imgPath: path.join('/images/admins/'),
+                    imgFullPath: path.join('/images/admins/', file.originalname)
+                   });
+
+                   
+
+                  newUser.save(function (err, user) {
+                    if (err) return console.error(err);
+                  });
+
+              callback(null, imgPath);
+         });
+     },
+     filename: function(req, file, callback) {
+         //callback(null, req.body.gameName);
+
+         callback(null, file.originalname);
+         //callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+     }
  });
 
- router.get("/logout", (req, res) => {
-     req.app.locals.user = undefined;
-     req.session.destroy();
-     res.redirect("/index");
- })
+ var adminUpload = multer({
+     storage: adminStorage
+ }).array("gameImg", 3); //Field name and max count
+
+
 
 export default {
     router

@@ -12,7 +12,7 @@ import bookRouter from '../routes/bookRoutes';
 import consoleRouter from '../routes/consoleRoutes';
 import mongoose from 'mongoose';
 
-mongoose.connect(process.env.PROD_MONGODB || 'mongodb://localhost/mydb');
+mongoose.connect(process.env.PROD_MONGODB || 'mongodb://delzar:DELzar_10@ds137110.mlab.com:37110/delzar-games' || 'mongodb://localhost/mydb');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -28,25 +28,52 @@ app.use(express.static('dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
-app.use(session({secret: 'library'}));
-app.use(passport.initialize());
-app.use(passport.session());
+
+app.use(session({
+    secret: 'keyboard cat',
+    cookie: { maxAge: 60000 }
+}));
 
 app.set('views', './src');
 app.set('view engine', 'ejs');
 //app.engine('.ejs', ejs);// <-- this does the trick
 
+app.use('/**', isAuthenticated);
 app.use('/', rootRouter);
 app.use('/Books', bookRouter);
 app.use('/Console', consoleRouter);
+
+
+function isAuthenticated(req, res, next) {
+  var user = req.session.user;
+  console.log("entro: " + req.session); 
+  console.log("Session: " + req.session);
+
+  if (user){
+      if (req.url.indexOf('sign') != -1
+      ||  req.url.indexOf('log')  != -1)
+        return res.redirect('/account');
+  }
+
+  if (!user){
+      if (req.url.indexOf('sign') != -1
+      &&  req.url.indexOf('log')  != -1
+      &&  req.url.indexOf('index') != -1)
+        return res.redirect('/signIn');
+  }
+
+  return next();
+}
 
 // Excepciones a la regla de no console en este archivo:
 /* eslint-disable no-console */
 
 app.listen(port, function(err){
-    if (err){
+if (err){
         console.log(err);
     } else {
-        console.log('Delzar Games is now running ...');
+        console.log("delzar-games is running...");
     }
+
+    app.locals.cart = [];
 })

@@ -6,9 +6,9 @@ import WebpackMd5Hash from 'webpack-md5-hash';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 export default {
-  debug: true, // Shows debug information
+  //debug: true, // Shows debug information
   devtool: 'source-map', // takes longer to generate because it is available to download when you want to inspect the code.
-  noInfo: false, //Webpack no muestra archivos a los que esta bundling
+  //noInfo: false, //Webpack no muestra archivos a los que esta bundling
   entry: {
     vendor: path.resolve(__dirname, 'src/api/vendor'),
     main: path.resolve(__dirname, 'src/index') //poner middleware para hot reloading
@@ -17,6 +17,7 @@ export default {
   output: {
     path: path.resolve(__dirname, 'dist'), //Create something in memory y se lo pasa al navegador
     publicPath: '/', // Simula los archivos
+    //filename: 'views/[name].[chunkhash].js' // Simula los archivos
     filename: 'views/[name].[chunkhash].js' // Simula los archivos
   },
   plugins: [
@@ -26,116 +27,138 @@ export default {
     new CopyWebpackPlugin([
             // Copy glob results, relative to context
             {
-                context: path.join(__dirname, 'src/views'),
+                //context: path.join(__dirname, 'src/views'),
+                context: path.join(__dirname, 'src/'),
                 from: '**/*',
-                to: path.join(__dirname, 'dist/views'),
+                to: path.join(__dirname, 'dist/'),
+                //to: path.join(__dirname, 'dist/views'),
             },
     ]),
    new HtmlWebpackPlugin({
       filename: 'views/cart.ejs',
+      inject: 'head',
       template: 'src/views/cart.ejs', // Load a custom template (ejs by default see the FAQ for details)
       trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
    }),
     new HtmlWebpackPlugin({
       filename: 'views/credit-card.ejs',
+      inject: 'head',
       template: 'src/views/credit-card.ejs', // Load a custom template (ejs by default see the FAQ for details)
       trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
    }),
      new HtmlWebpackPlugin({
       filename: 'views/sign-in.ejs',
+      inject: 'head',
       template: 'src/views/sign-in.ejs', // Load a custom template (ejs by default see the FAQ for details)
       trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
    }),
     new HtmlWebpackPlugin({
       filename: 'views/sign-up.ejs',
+      inject: 'head',
       template: 'src/views/sign-up.ejs', // Load a custom template (ejs by default see the FAQ for details)
       trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
    }),
     new HtmlWebpackPlugin({
       filename: 'views/faqs.ejs',
+      inject: 'head',
       template: 'src/views/faqs.ejs', // Load a custom template (ejs by default see the FAQ for details)
       trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
    }),
    new HtmlWebpackPlugin({
       filename: 'views/payform.ejs',
+      inject: 'head',
       template: 'src/views/payform.ejs', // Load a custom template (ejs by default see the FAQ for details)
       trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
    }),
       new HtmlWebpackPlugin({
       filename: 'views/game-detail.ejs',
+      inject: 'head',
       template: 'src/views/game-detail.ejs', // Load a custom template (ejs by default see the FAQ for details)
       trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
    }),
     new HtmlWebpackPlugin({
       filename: 'views/console-gallery.ejs',
+      inject: 'head',
       template: 'src/views/console-gallery.ejs', // Load a custom template (ejs by default see the FAQ for details)
       trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
    }),
    new HtmlWebpackPlugin({
       filename: 'views/account.ejs',
+      inject: 'head',
       template: 'src/views/account.ejs', // Load a custom template (ejs by default see the FAQ for details)
       trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
    }),
    new HtmlWebpackPlugin({
       filename: 'views/admin-form.ejs',
+      inject: 'head',
       template: 'src/views/admin-form.ejs', // Load a custom template (ejs by default see the FAQ for details)
       trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
    }),
    new HtmlWebpackPlugin({
       filename: 'views/admin.ejs',
+      inject: 'head',
       template: 'src/views/admin.ejs', // Load a custom template (ejs by default see the FAQ for details)
       trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
    }),
    new HtmlWebpackPlugin({
       filename: 'views/console-form.ejs',
+      inject: 'head',
       template: 'src/views/console-form.ejs', // Load a custom template (ejs by default see the FAQ for details)
       trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
    }),
    new HtmlWebpackPlugin({
       filename: 'views/consoles.ejs',
+      inject: 'head',
       template: 'src/views/consoles.ejs', // Load a custom template (ejs by default see the FAQ for details)
       trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
    }),
    new HtmlWebpackPlugin({
       filename: 'views/contact.ejs',
+      inject: 'head',
       template: 'src/views/contact.ejs', // Load a custom template (ejs by default see the FAQ for details)
       trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
    }),
    new HtmlWebpackPlugin({
       filename: 'views/game-form.ejs',
+      inject: 'head',
       template: 'src/views/game-form.ejs', // Load a custom template (ejs by default see the FAQ for details)
       trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
    }),
    new HtmlWebpackPlugin({
       filename: 'views/games.ejs',
+      inject: 'head',
       template: 'src/views/games.ejs', // Load a custom template (ejs by default see the FAQ for details)
       trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
    }),
    new HtmlWebpackPlugin({
       filename: 'views/invoice-form.ejs',
+      inject: 'head',
       template: 'src/views/invoice-form.ejs', // Load a custom template (ejs by default see the FAQ for details)
       trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
    }),
    new HtmlWebpackPlugin({
       filename: 'views/password-form.ejs',
+      inject: 'head',
       template: 'src/views/password-form.ejs', // Load a custom template (ejs by default see the FAQ for details)
       trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
    }),
    new HtmlWebpackPlugin({
       filename: 'views/user-form.ejs',
+      inject: 'head',
       template: 'src/views/user-form.ejs', // Load a custom template (ejs by default see the FAQ for details)
       trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
    }),
    new HtmlWebpackPlugin({
       filename: 'views/users.ejs',
+      inject: 'head',
       template: 'src/views/users.ejs', // Load a custom template (ejs by default see the FAQ for details)
       trackJSToken: '78b6b1a30ec140d4974ecd6d93579ca3' //TrackJSTOKEN ON PRODUCTION ONLY
    }),
     new HtmlWebpackPlugin({
       filename: 'views/index.ejs',
       template: 'src/views/index.ejs',  // ejs-loader default loader
-      compile: true,
-      inject: true,
+      compile: false,
+      inject: 'head',
       cache: true,
       title: 'Webpack App',
       xhtml: false,
@@ -165,9 +188,10 @@ export default {
     loaders: [
       {
         test: /\.(html|ejs)$/,
-        loader: 'file-loader?name=[path][name].[ext]!extract-loader!html-loader?' + JSON.stringify({attrs: ["img:src", "link:href"]}),
+        loader: 'html-loader',
+        //loader: 'file-loader?name=[path][name].[ext]!extract-loader!html-loader?', //+ JSON.stringify({attrs: ["img:src", "link:href"]}),
         options: {
-          minimize: true,
+          minimize: false,
           removeComments: true,
           collapseWhitespace: true,
           removeRedundantAttributes: true,
@@ -180,32 +204,13 @@ export default {
           minifyURLs: true
         }
       },
-      {
+      /*{
          test: /\.(gif|png|jpe?g|svg)$/i,
          loaders: [
                 'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
                 'image-webpack-loader'
                 ],
-        options: {
-            mozjpeg: {
-            quality: 65
-            },
-            pngquant:{
-            quality: "65-90",
-            speed: 4
-            },
-            svgo:{
-            plugins: [
-                {
-                removeViewBox: false
-                },
-                {
-                removeEmptyAttrs: false
-                }
-            ]
-            }
-        }
-       },
+       },*/
      /*{
         test: /\.ejs$/,
         //loader: 'ejs-loader' // default

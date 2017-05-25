@@ -12,8 +12,81 @@
 
         <!-- jQuery library -->
         <script src="../vendor.js"></script>
-        <script src="http://malsup.github.com/jquery.form.js"></script> 
-            <script>
+          
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+     </head>
+  <body>
+
+    <%- include header %>
+
+            <div class="container ">
+                <div class="row padding-10 ">
+                    <%- include sidebar-admin %>
+            <div class="col-sm-8">
+            <div class="std">
+            <div class="cms-page">
+                <h2>Game Form</h2>
+            <!-- form action="/save-game" action="post" -->
+            <form id="game-form" enctype="multipart/form-data" action="/new-game" method="post">
+                <div class="form-group"> <!-- Name field -->
+                    <label class="control-label " for="name">Nombre</label>
+                    <input class="form-control" id="gameName" name="gameName" data-validation="alphanum" type="text" placeholder="Nombre"/>
+                </div>
+                <span class="help-block"></span>
+
+                <div class="form-group"> <!-- Email field -->
+                    <label class="control-label requiredField" for="gameConsole">Consola<span class="asteriskField">*</span></label>
+                    <select name="gameConsole" id="vendor" data-validation="select">
+                            <option value="PS3" selected>PS3</option>
+                            <option value="PS4">PS4</option>
+                            <option value="XBOX-360">XBOX 360</option>
+                            <option value="XBOX-ONE">XBOX ONE</option>
+                            <option value="3DS">3DS</option>
+                            <option value="WIIU">WIIU</option>
+                            <option value="SWITCH">SWITCH</option>
+                    </select></div>
+                <span class="help-block"></span>
+
+                <div class="form-group"> <!-- Subject field -->
+                    <label class="control-label " for="gamePrice">Price</label>
+                    <input class="form-control" id="gamePrice" name="gamePrice" data-validation="number" data-validation="number" type="text" placeholder="Precio"/>
+                </div>
+                <span class="help-block"></span>
+
+                <div class="form-group"> <!-- Subject field -->
+                    <label class="control-label " for="gameStatus">Estatus</label>
+                        <select name="gameStatus" id="vendor" data-validation="select">
+                            <option value="Existencia" selected>Existencia</option>
+                            <option value="Proximamente">Proximamente</option>
+                            <option value="Agotado">Agotado</option>
+                        </select>
+                </div>
+                <span class="help-block"></span>
+
+                <div class="form-group"> <!-- Subject field -->
+                    <label for="gameImg">Select images:</label><br />
+                    <input type="file" name="gameImg" multiple>
+                </div>
+                <span class="help-block"></span>
+
+                <div class="form-group2">
+                    <button class="btn btn-primary " name="submit" type="submit" onsubmit="validateForm">Submit</button>
+                </div>
+
+            </form>
+
+             </div>
+            </div>
+        </div>
+    </div>
+</div>
+        <%- include footer %>
+
+    <script src="../main.js">
+    </script>
+
+      <script>
                 $(document).ready(function () {
                     var options = {
                         beforeSubmit: showRequest,  // pre-submit callback
@@ -39,66 +112,5 @@
                     alert('status: ' + statusText + '\n\nresponseText: \n' + responseText );
                 }
         </script>
-        <!-- Latest compiled JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-     </head>
-  <body>
-
-    <%- include header %>
-
-            <div class="container ">
-                <div class="row padding-10 ">
-                    <%- include sidebar-admin %>
-            <div class="col-sm-8">
-            <div class="std">
-            <div class="cms-page">
-                <h2>Game Form</h2>
-            <!-- form action="/save-game" action="post" -->
-            <form id="game-form" enctype="multipart/form-data" action="save-game" method="post">
-                <div class="form-group"> <!-- Name field -->
-                    <label class="control-label " for="name">Nombre</label>
-                    <input class="form-control" id="gameName" name="gameName" data-validation="alphanum" type="text" placeholder="Nombre"/>
-                </div>
-                <span class="help-block"></span>
-
-                <div class="form-group"> <!-- Email field -->
-                    <label class="control-label requiredField" for="gameConsole">Consola<span class="asteriskField">*</span></label>
-                    <input class="form-control" id="gameConsole" name="gameConsole" data-validation="alphanum" type="text" placeholder="Consola"/>
-                </div>
-                <span class="help-block"></span>
-
-                <div class="form-group"> <!-- Subject field -->
-                    <label class="control-label " for="gamePrice">Price</label>
-                    <input class="form-control" id="gamePrice" name="gamePrice" data-validation="number" data-validation="number" type="text" placeholder="Precio"/>
-                </div>
-                <span class="help-block"></span>
-
-                <div class="form-group"> <!-- Subject field -->
-                    <label class="control-label " for="gameStatus">Estatus</label>
-                    <input class="form-control" id="gameStatus" name="gameStatus" data-validation="alphanum" type="text" placeholder="Estatus" onblur=""/>
-                </div>
-                <span class="help-block"></span>
-
-                <div class="form-group"> <!-- Subject field -->
-                    <label for="gameImg">Select images:</label><br />
-                    <input type="file" name="gameImg" multiple>
-                </div>
-                <span class="help-block"></span>
-
-                <div class="form-group2">
-                    <button class="btn btn-primary " name="submit" type="submit" onclick="validateForm();">Submit</button>
-                </div>
-
-            </form>
-
-             </div>
-            </div>
-        </div>
-    </div>
-</div>
-        <%- include footer %>
-
-    <script src="../main.js">
-    </script>
   </body>
 </html>
