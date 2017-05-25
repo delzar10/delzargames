@@ -395,6 +395,12 @@ router.post("/save-game", function(req, res) {
     res.render('../src/views/credit-card.ejs');
  });
 
+ router.get("/logout", (req, res) => {
+     req.app.locals.user = undefined;
+     req.session.destroy();
+     res.redirect("/index");
+ })
+
 export default {
     router
 };
