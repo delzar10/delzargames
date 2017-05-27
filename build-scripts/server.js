@@ -12,7 +12,6 @@ import session from 'express-session';
 import helmet from 'helmet';
 
 
-let url = "mongodb://delzar:DELzar_10@ds137110.mlab.com:37110/delzar-games";
 //let url = "mongodb://localhost/mydb";
 mongoose.connect((process.env.PROD_MONGODB || url));
 

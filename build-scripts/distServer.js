@@ -12,7 +12,7 @@ import bookRouter from '../routes/bookRoutes';
 import consoleRouter from '../routes/consoleRoutes';
 import mongoose from 'mongoose';
 
-mongoose.connect(process.env.PROD_MONGODB || 'mongodb://delzar:DELzar_10@ds137110.mlab.com:37110/delzar-games' || 'mongodb://localhost/mydb');
+mongoose.connect(process.env.PROD_MONGODB || 'mongodb://localhost/mydb');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
