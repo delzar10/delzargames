@@ -25,13 +25,13 @@ export default {
       jquery: "~jquery/"
     }
   }*/
-  plugins: [ 
+  plugins: [
       new webpack.ProvidePlugin({
            $: 'jquery',
            jQuery: 'jquery',
            'window.$': 'jquery',
            'moment': 'moment'
-       }), 
+       }),
     /*new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor'
     }),*/
@@ -45,14 +45,18 @@ export default {
         loader: 'ejs-compiled-loader'
       },*/
       {
-        test: /\.js$/, 
-        loaders: ['babel-loader'], 
+        test: /\.js$/,
+        loaders: ['babel-loader'],
         exclude: /node_modules/
       },
       //{test: /\.css$/, loader: ExtractTextPlugin.extract("csss?sourceMap")}, //!autoprefixer-loader
-      { 
-        test: require.resolve("jquery"), 
+      {
+        test: require.resolve("jquery"),
         loader: "expose-loader?$!expose-loader?jQuery" },
+      {
+        test: require.resolve("localforage"),
+        loader: "expose-loader?localForage"
+      },
       {
         test: /\.(css|scss|sass)$/,  // style-loader! inject it to style tag style-loader
         loader: ExtractTextPlugin.extract("css-loader?sourceMap?!sass-loader?sourceMap")
@@ -68,10 +72,10 @@ export default {
       },
       */
       {
-        test:/bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/, 
-        loader: 'imports-loader?jQuery=jquery' 
+        test:/bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/,
+        loader: 'imports-loader?jQuery=jquery'
       },
-      { 
+      {
         test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
         loader: 'file-loader?name=fonts/[name].[ext]'
       }

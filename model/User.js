@@ -15,9 +15,9 @@
           telephone: {type: Number},
         },
         username: {type: String, trim: true},
-        email: {type: String, trim: true},
+        email:    {type: String, trim: true},
         password: {type: String, trim:true, },
-        status: {type: String, trim: true},
+        status:   {type: String, trim: true},
         roles: {
             name: [{type: String, trim: true}]
         },

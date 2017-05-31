@@ -1,0 +1,6 @@
+{
+    "databaseConfig": {
+        "host": "delzar:DELzar_10@ds151451.mlab.com:51451",
+        "database": "delzar-games-development"
+    }
+}

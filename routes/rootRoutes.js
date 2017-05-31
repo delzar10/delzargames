@@ -61,7 +61,7 @@ router.get('/index', function(req, res){
         });
     }).then(function(result){
         console.log(result);
-        res.render('../dist/views/index.ejs', {
+        res.render('../src/views/index.ejs', {
             ps3Games: result[0],
             ps4Games: result[1],
             xbox360Games: result[2],
@@ -77,13 +77,13 @@ router.get('/index', function(req, res){
 
 router.get('/users', function(req, res){
     User.find({}, (err, users) => {
-        res.render('../dist/views/users.ejs', {users: users});
+        res.render('../src/views/users.ejs', {users: users});
     });
 });
 
 router.get('/consoles', function(req, res){
     Console.find({}, (err, consoles) => {
-        res.render('../dist/views/consoles.ejs', {consoles: consoles});
+        res.render('../src/views/consoles.ejs', {consoles: consoles});
     });
 });
 
@@ -91,19 +91,19 @@ router.get('/games', function(req, res){
 
     Game.find({}, function(err, games){
         if (err) return console.error(err);
-        res.render('../dist/views/games.ejs', {games: games});
+        res.render('../src/views/games.ejs', {games: games});
     });
-    
+
 });
 
 router.get('/consoles', function(req, res){
-    res.render('../dist/views/consoles.ejs');
-    
+    res.render('../src/views/consoles.ejs');
+
 });
 
 router.route('/new-admin')
 .get(function(req, res){
-    res.render('../dist/views/admin-form.ejs');
+    res.render('../src/views/admin-form.ejs');
 })
 .post(function(req, res){
     adminUpload(req, res, err =>{
@@ -117,7 +117,7 @@ router.route('/new-admin')
 
 router.route('/new-game')
 .get(function(req, res){
-    res.render('../dist/views/game-form.ejs');
+    res.render('../src/views/game-form.ejs');
 })
 .post(function(req, res){
     gameUpload(req, res, function(err) {
@@ -128,10 +128,10 @@ router.route('/new-game')
      });
 })
 .put(function(req, res){
-    res.render('../dist/views/game-form.ejs');
+    res.render('../src/views/game-form.ejs');
 })
 .delete(function(req, res){
-    res.render('../dist/views/game-form.ejs');
+    res.render('../src/views/game-form.ejs');
 })
 
 router.route('/new-console')
@@ -144,9 +144,9 @@ router.route('/new-console')
         console.log(statuses);
         return {vendors, statuses};
     }
-    
+
     queryResult().then( results =>{
-        
+
     })*/
     return res.render(path.join(__dirname, '../src/views/console-form.ejs'));
 })
@@ -164,13 +164,13 @@ router.route('/new-console')
 
 router.get('/contact', function(req, res){
 
-    res.render('../dist/views/contact.ejs');
-    
+    res.render('../src/views/contact.ejs');
+
 });
 
 router.get('/payform', function(req, res){
-    res.render('../dist/views/payform.ejs');
-    
+    res.render('../src/views/payform.ejs');
+
 });
 
 router.get('/signIn', function(req, res){
@@ -189,8 +189,8 @@ router.get('/signIn', function(req, res){
             return res.redirect('/account');
          }
     }
-    res.render('../dist/views/sign-in.ejs');
-    
+    res.render('../src/views/sign-in.ejs');
+
 });
 
 router.post('/login', function(req, res){
@@ -199,7 +199,7 @@ router.post('/login', function(req, res){
         req.session.user = result;
         req.app.locals.user = result;
         console.log("Resultado:" + result);
-        res.render('../dist/views/account.ejs');
+        res.render('../src/views/account.ejs');
     });
 });
 
@@ -209,8 +209,8 @@ router.get('/signUp', function(req, res){
         res.redirect('/index');
     }
 
-    res.render('../dist/views/sign-up.ejs');
-    
+    res.render('../src/views/sign-up.ejs');
+
 });
 
 router.get('/welcome', function(req, res){
@@ -218,37 +218,37 @@ router.get('/welcome', function(req, res){
 });
 
 router.get('/credit', function(req, res){
-    res.render('../dist/views/credit-card.ejs');
-    
+    res.render('../src/views/credit-card.ejs');
+
 });
 
 router.get('/cart', function(req, res){
-    res.render('../dist/views/cart.ejs');
-    
+    res.render('../src/views/cart.ejs');
+
 });
 
 router.get('/account', function(req, res){
-    res.render('../dist/views/account.ejs');
+    res.render('../src/views/account.ejs');
 });
 
 router.get('/user-form', function(req, res){
-    res.render('../dist/views/user-form.ejs');
+    res.render('../src/views/user-form.ejs');
 });
 
 router.get('/password-form', function(req, res){
-    res.render('../dist/views/password-form.ejs');
+    res.render('../src/views/password-form.ejs');
 });
 
 router.get('/invoice-form', function(req, res){
-    res.render('../dist/views/invoice-form.ejs');
+    res.render('../src/views/invoice-form.ejs');
 });
 
 router.get('/admin', function(req, res){
-    res.render('../dist/views/admin.ejs');
+    res.render('../src/views/admin.ejs');
 });
 
 router.get('/faqs', function(req, res){
-    res.render('../dist/views/faqs.ejs');
+    res.render('../src/views/faqs.ejs');
 });
 
 router.param('username', function(req, res, next, username) {
@@ -257,7 +257,7 @@ router.param('username', function(req, res, next, username) {
     // once validation is done save the new item in the req
     req.username = username;
     // go to the next thing
-    next(); 
+    next();
 });
 
 
@@ -274,7 +274,7 @@ router.get('/delete-game/:id', function(req, res){
     Game.find({_id: req.params.id}).remove( err => {
         if (err) console.log(err);
     })
-    
+
     res.end("Game: " + req.params.id + " fue correctamente Borrado");
 });
 
@@ -283,7 +283,7 @@ router.get('/delete-console/:id', function(req, res){
     Console.find({_id: req.params.id}).remove( err => {
         if (err) console.log(err);
     })
-    
+
     res.end("Consola: " + req.params.id + " fue correctamente Borrado");
 });
 
@@ -321,7 +321,7 @@ router.get('/user/:id', function (req, res, next) {
 router.get('/form', function (req, res) {
         console.log('template form');
 
-        res.render('../dist/views/form.ejs', {
+        res.render('../src/views/form.ejs', {
             title: "Login", //page title
             action: "/login", //post action for the form
             fields: [
@@ -353,7 +353,7 @@ router.get('/form', function (req, res) {
 
     req.app.locals.user = newUser;
 
-    res.render('../dist/views/credit-card.ejs');
+    res.render('../src/views/credit-card.ejs');
  });
 
  router.get("/logout", (req, res) => {
@@ -365,7 +365,7 @@ router.get('/form', function (req, res) {
  router.get('/game/:id', function(req, res, next){
      Game.findById(req.params.id, (err, game) =>{
          if (err) console.log(err);
-         res.render('../dist/views/game-detail.ejs', {game: game});
+         res.render('../src/views/game-detail.ejs', {game: game});
      })
  })
 
@@ -492,7 +492,7 @@ var consoleStorage = multer.diskStorage({
                     imgFullPath: path.join('/images/admins/', file.originalname)
                    });
 
-                   
+
 
                   newUser.save(function (err, user) {
                     if (err) return console.error(err);

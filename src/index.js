@@ -10,8 +10,8 @@ import './js/best-seller';
 import './js/payform-validate';
 import './js/validation';*/
 
+import * as localForage from 'localforage';
 import {getUsers} from './api/userApi';
-
 import './sass/main.scss';
 
 // Para deshabilitar la regla se pone el siguiente comentario
@@ -32,26 +32,37 @@ function requireAll(requireContext) {
 }
 // requires and returns all modules that match
 
-//var modules = requireAll(require.context("./images/", true, /^\.\/.*\.(gif|png|jpe?g|svg)$/));
+
+localForage.getItem('bestGames', (err, value) => {
+    if (err) {
+        $.ajax(
+            "/api/best-seller",
+            function(result) {
+                localForage.setItem('bestGames', result).then( err => {
+                    if (err) console.log("couldn't save data correctly");
+                });
+            }
+        )
+    }
+})
 
 
-/*global.users = getUsers();
 
-getUsers().then( result => {
-    console.log(`I entered getUsers`);
-    let usersBody = "";
 
-    result.forEach( user => {
-        usersBody += `<tr>
-        <td><a href="#" data-id="${user.id}" class="deleteUser">Delete</a></td>
-        <td>${user.id}</td>
-        <td>${user.firstName}</td>
-        <td>${user.lastName}</td>
-        <td>${user.email}</td>
-        </tr>`
+localForage.setItem('key', 'value', function (err) {
+  // if err is non-null, we got an error
+  //debugger;
+  if (err){
+      alert("Error:" + err);
+  }else{
+
+    localForage.getItem('key', function (err2, value) {
+        if (err){
+           alert("Error2:" + err2);
+        } else {
+           alert("Value: " + value);
+        }
+        // if err is non-null, we got an error. otherwise, value is the value
     });
-
-    global.document.getElementById('users').innerHTML = usersBody;
+  }
 });
-*/
-console.log("hola");
