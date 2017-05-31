@@ -15,8 +15,8 @@ class Router {
 
         fs.readdirSync(folderName).forEach((file) => {
 
-            const fullName = path.join(folderName, file);
-            const stat = fs.lstatSync(fullName);
+            let fullName = path.join(folderName, file);
+            let stat = fs.lstatSync(fullName);
 
             if (stat.isDirectory()) {
                 //Recursively walk-through folders
@@ -29,14 +29,14 @@ class Router {
                     dirs.splice(0, 1);
                 }
 
-                const router = express.Router();
+                let router = express.Router();
                 //Generate the route
-                const baseRoute = '/' + dirs.join('/');
+                let baseRoute = '/' + dirs.join('/');
                 console.log('Created route: ' + baseRoute + ' for ' + fullName);
 
                 //Load the JavaScript file ("controller") and pass the router to it
-                const controllerClass = require('../' + fullName);
-                const controller = new controllerClass(router);
+                let controllerClass = require('../' + fullName);
+                let controller = new controllerClass(router);
                 //Associate the route with the router
                 app.use(baseRoute, router);
             }
