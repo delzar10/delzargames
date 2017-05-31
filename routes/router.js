@@ -45,10 +45,6 @@ class Router {
 
 }
 
-
-export default {
-    router: new Router()
-}
-
+export const router = new Router();
 
 

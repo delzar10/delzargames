@@ -14,7 +14,7 @@ class GamesController {
             if (err) {
                 console.log('*** getGames error: ' + util.inspect(err));
                 res.json({
-                    states: null
+                    games: null
                 });
             } else {
                 console.log('*** getGames ok');
@@ -25,4 +25,4 @@ class GamesController {
 
 }
 
-module.exports = StatesController;
+module.exports = GamesController;

@@ -15,8 +15,8 @@ import rootRouter      from '../routes/rootRoutes';
 import bookRouter      from '../routes/bookRoutes';
 import consoleRouter   from '../routes/consoleRoutes';
 import errorhandler    from 'error-handler';
-import router          from '../routes/router';
-import database        from '../lib/database';
+import {router}        from '../routes/router';
+import {database}      from '../lib/database';
 
 let port        = process.env.PORT || 8080;
 let app         = express();
@@ -101,7 +101,7 @@ class DevServer {
     }
 
     initRoutes() {
-        router.load(app, '../controllers');
+        router.load(app, './controllers');
 
         app.use('/', rootRouter);
         app.use('/Books', bookRouter);
