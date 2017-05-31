@@ -109,7 +109,7 @@ class DevServer {
 
         // redirect all others to the index (HTML5 history)
         app.all('/*', (req, res) => {
-            res.sendFile(__dirname + '/public/index.html');
+            res.sendFile(__dirname + '../src/views/index.html');
         });
     }
 }

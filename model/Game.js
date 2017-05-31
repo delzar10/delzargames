@@ -10,6 +10,10 @@
       imgName:     { type: String, trim: true},
       imgFullPath: { type: String, trim: true}
     });
+    //declaration of models with respective schemas
+    var Game = mongoose.model('Game', GameSchema, 'games');
 
-module.exports = mongoose.model('Game', GameSchema, 'games');
+module.exports = {
+    Game: Game
+}
 
