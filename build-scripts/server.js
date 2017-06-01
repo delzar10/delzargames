@@ -18,7 +18,7 @@ import errorhandler    from 'error-handler';
 import {router}        from '../routes/router';
 import {database}      from '../lib/database';
 
-let port        = process.env.PORT || 8080;
+let port        = process.env.PORT || 9000;
 let app         = express();
 let compiler    = webpack(config);
 let mongoClient = mongoose.MongoClient;
@@ -47,7 +47,7 @@ class DevServer {
     }
 
     initSecurity() {
-        app.use(helmet());
+        //app.use(helmet());
         app.use(session({
             secret: 'keyboard cat',
             cookie: { maxAge: 6000 }
@@ -55,8 +55,16 @@ class DevServer {
     }
 
     initExpressMiddleWare() {
+        // a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
+        app.use(require('webpack-dev-middleware')(compiler, {
+            noInfo: false, // No especial info
+            stats: { colors: true },
+            publicPath: config.output.publicPath // Public path
+        }));
+
         //app.use(favicon(__dirname + '/public/images/favicon.ico'));
-        app.use(express.static(__dirname + '/src'));
+        app.use(express.static('src'));
+        //app.use(express.static(__dirname + 'src'));
         app.use(morgan('dev'));
         app.use(bodyParser.urlencoded({ extended: true }));
         app.use(bodyParser.json());
@@ -74,16 +82,10 @@ class DevServer {
         process.on('uncaughtException', (err) => {
             if (err) console.log(err, err.stack);
         });
-
-        // a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
-        app.use(require('webpack-dev-middleware')(compiler, {
-            noInfo: false, // No especial info
-            stats: { colors: true },
-            publicPath: config.output.publicPath // Public path
-        }));
     }
 
     initCustomMiddleware() {
+        /*
         if (process.platform === "win32") {
             require("readline").createInterface({
                 input: process.stdin,
@@ -98,19 +100,20 @@ class DevServer {
             console.log('SIGINT: Closing MongoDB connection');
             database.close();
         });
+        */
     }
 
     initRoutes() {
-        router.load(app, './controllers');
+        //router.load(app, './controllers');
 
         app.use('/', rootRouter);
         app.use('/Books', bookRouter);
         app.use('/Console', consoleRouter);
 
         // redirect all others to the index (HTML5 history)
-        app.all('/*', (req, res) => {
+        /*app.all('/*', (req, res) => {
             res.sendFile(__dirname + '../src/views/index.html');
-        });
+        });*/
     }
 }
 

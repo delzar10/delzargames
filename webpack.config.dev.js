@@ -8,7 +8,9 @@ export default {
   devtool: 'inline-source-map', // takes longer to generate because it is available to download when you want to inspect the code.
   //noInfo: false, //Webpack no muestra archivos a los que esta bundling
   entry: {
-    vendor: path.resolve(__dirname, 'src/api/vendor'),
+    fetch: require.resolve('whatwg-fetch'),
+    bootstrap: require.resolve('bootstrap-sass'),
+    jqueryForms: path.resolve(__dirname, 'src/js/plugins/jquery.form.min'),
     main: path.resolve(__dirname, 'src/index') //poner middleware para hot reloading
     //path.resolve(__dirname, 'src/index') //poner middleware para hot reloading
   },
@@ -61,10 +63,12 @@ export default {
         test: /\.(css|scss|sass)$/,  // style-loader! inject it to style tag style-loader
         loader: ExtractTextPlugin.extract("css-loader?sourceMap?!sass-loader?sourceMap")
       },
+    // Font and images
       {
-        test: /\.(eot|svg|ttf|woff|woff2)$/,
-        loader: 'file-loader'
+        test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        loader: 'file-loader?name=fonts/[name].[ext]'
       },
+
       /*
       {
         test: require.resolve("jquery"),

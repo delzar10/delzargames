@@ -13,6 +13,7 @@ import './js/validation';*/
 import * as localForage from 'localforage';
 import {getUsers} from './api/userApi';
 import './sass/main.scss';
+import './js/ServiceWorkers/sw';
 
 // Para deshabilitar la regla se pone el siguiente comentario
 /* eslint-disable no-console */
@@ -33,7 +34,7 @@ function requireAll(requireContext) {
 // requires and returns all modules that match
 
 
-localForage.getItem('bestGames', (err, value) => {
+/*localForage.getItem('bestGames', (err, value) => {
     if (err) {
         $.ajax(
             "/api/best-seller",
@@ -44,11 +45,11 @@ localForage.getItem('bestGames', (err, value) => {
             }
         )
     }
-})
+})*/
 
 
 
-
+/*
 localForage.setItem('key', 'value', function (err) {
   // if err is non-null, we got an error
   //debugger;
@@ -66,3 +67,4 @@ localForage.setItem('key', 'value', function (err) {
     });
   }
 });
+*/
