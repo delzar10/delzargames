@@ -26,6 +26,7 @@ let mongoClient = mongoose.MongoClient;
 class DevServer {
 
     constructor() {
+        this.initDataBase();
         this.initViewEngine();
         this.initExpressMiddleWare();
         this.initCustomMiddleware();
@@ -47,7 +48,7 @@ class DevServer {
     }
 
     initSecurity() {
-        //app.use(helmet());
+        app.use(helmet());
         app.use(session({
             secret: 'keyboard cat',
             cookie: { maxAge: 6000 }
@@ -85,7 +86,7 @@ class DevServer {
     }
 
     initCustomMiddleware() {
-        /*
+
         if (process.platform === "win32") {
             require("readline").createInterface({
                 input: process.stdin,
@@ -100,11 +101,10 @@ class DevServer {
             console.log('SIGINT: Closing MongoDB connection');
             database.close();
         });
-        */
     }
 
     initRoutes() {
-        //router.load(app, './controllers');
+        router.load(app, './controllers');
 
         app.use('/', rootRouter);
         app.use('/Books', bookRouter);
@@ -114,6 +114,17 @@ class DevServer {
         /*app.all('/*', (req, res) => {
             res.sendFile(__dirname + '../src/views/index.html');
         });*/
+    }
+
+    initDataBase(){
+        database.open((err, status) => {
+            if (status === true){
+                console.log("Connected to MongoDB");
+            } else {
+                console.log("Error Connecting to MongoDB");
+                process.exit(1);
+            }
+        })
     }
 }
 

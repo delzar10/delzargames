@@ -1,6 +1,6 @@
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/js/ServiceWorkers/sw.js').then(function(registration) {
+    navigator.serviceWorker.register('/sw.js').then(function(registration) {
       // Registration was successful
       console.log('ServiceWorker registration successful with scope: ', registration.scope);
     }).catch(function(err) {
@@ -12,8 +12,12 @@ if ('serviceWorker' in navigator) {
 
 var CACHE_NAME = 'my-site-cache-v1';
 var urlsToCache = [
-  //'/',
-  '/styles.css'
+  '/',
+  '/styles.css',
+  '/fetch.js',
+  '/bootstrap.js',
+  '/main.js',
+  '/jqueryForms.js'
   //'/script/main.js'
 ];
 
@@ -28,20 +32,22 @@ self.addEventListener('install', function(event) {
   );
 });
 
-self.addEventListener('fetch', function(event) {
-  event.respondWith(
-    caches.match(event.request)
-      .then(function(response) {
-        // Cache hit - return response
-        if (response) {
-          return response;
-        }
-        return fetch(event.request);
-      }
-    )
-  );
-});
 
+// self.addEventListener('fetch', function(event) {
+//   event.respondWith(
+//     caches.match(event.request)
+//       .then(function(response) {
+//         // Cache hit - return response
+//         if (response) {
+//           return response;
+//         }
+//         return fetch(event.request);
+//       }
+//     )
+//   );
+// });
+
+/*
 self.addEventListener('fetch', function(event) {
   event.respondWith(
     caches.match(event.request)
@@ -80,11 +86,20 @@ self.addEventListener('fetch', function(event) {
         );
       })
     );
+});*/
+
+
+self.addEventListener('fetch', (event) => {
+    event.respondWith(
+        caches.match(event.request).then( (response) => {
+            return response || fetch(event.request);
+        })
+    );
 });
 
 self.addEventListener('activate', function(event) {
 
-  var cacheWhitelist = ['pages-cache-v1', 'blog-posts-cache-v1', 'my-site-cache-v1'];
+  var cacheWhitelist = ['my-site-cache-v1'];
 
   event.waitUntil(
     caches.keys().then(function(cacheNames) {

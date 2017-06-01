@@ -46,7 +46,7 @@ app.use('/Console', consoleRouter);
 
 function isAuthenticated(req, res, next) {
   var user = req.session.user;
-  console.log("entro: " + req.session); 
+  console.log("entro: " + req.session);
   console.log("Session: " + req.session);
 
   if (user){

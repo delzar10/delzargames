@@ -13,7 +13,7 @@ import './js/validation';*/
 import * as localForage from 'localforage';
 import {getUsers} from './api/userApi';
 import './sass/main.scss';
-import './js/ServiceWorkers/sw';
+import './sw';
 
 // Para deshabilitar la regla se pone el siguiente comentario
 /* eslint-disable no-console */
@@ -34,18 +34,37 @@ function requireAll(requireContext) {
 // requires and returns all modules that match
 
 
-/*localForage.getItem('bestGames', (err, value) => {
-    if (err) {
-        $.ajax(
-            "/api/best-seller",
-            function(result) {
-                localForage.setItem('bestGames', result).then( err => {
-                    if (err) console.log("couldn't save data correctly");
-                });
-            }
-        )
-    }
-})*/
+var setData = (response) => {
+    alert(response);
+}
+
+var printError = (req, status, err) => {
+    alert ('Something went wrong', status, err);
+}
+
+
+
+// localForage.getItem('bestGames', (err, value) => {
+//     alert("Hola get ITEM");
+//     if (err) {
+//        $.getJSON('/api/games', (resp) => {
+//            console.log('this');
+//             alert("hola desde Api " +resp);
+//        });
+//     } else {
+//        alert("hola desde localForage " + value);
+//     }
+
+        // $.ajax({
+        //     type:     'GET',
+        //     url:      '/api/best-seller',
+        //     dataType: 'json',
+
+        //     sucess:   setData,
+        //     error:    printError
+        // });
+
+// })
 
 
 
