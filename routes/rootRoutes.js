@@ -76,7 +76,6 @@ router.get('/index', function(req, res){
     });
     */
 
-    console.log("hello from index where the white people live at")
     res.render('../src/views/index.ejs', {});
 });
 

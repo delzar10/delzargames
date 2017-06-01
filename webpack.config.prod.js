@@ -220,13 +220,13 @@ export default {
         //loader: 'ejs-html-loader'
 
       },*/
-      { 
-        test: require.resolve("jquery"), 
-        loader: "expose-loader?$!expose-loader?jQuery" 
+      {
+        test: require.resolve("jquery"),
+        loader: "expose-loader?$!expose-loader?jQuery"
       },
       {
-        test: /\.js$/, 
-        loaders: ['babel-loader'], 
+        test: /\.js$/,
+        loaders: ['babel-loader'],
         exclude: /node_modules/},
      // {test: /\.css$/, loader: ExtractTextPlugin.extract("css?sourceMap")}, //!autoprefixer-loader
      // {test: /\.scss$/, loader: ExtractTextPlugin.extract("css?sourceMap?!sass?sourceMap")},
@@ -239,8 +239,8 @@ export default {
         loader: 'file-loader'
       },
       {
-        test:/bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/, 
-        loader: 'imports-loader?jQuery=jquery' 
+        test:/bootstrap-sass[\/\\]assets[\/\\]javascripts[\/\\]/,
+        loader: 'imports-loader?jQuery=jquery'
       }
     ]
   }
