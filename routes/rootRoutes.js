@@ -24,6 +24,8 @@ router.get('/', function(req, res){
 
 router.get('/index', function(req, res){
 
+    /*
+
     Game.find({}).exec().then(result => {
         console.log("bestArticles: " + result);
         req.app.locals.bestArticles = result;
@@ -72,7 +74,10 @@ router.get('/index', function(req, res){
     }).then(undefined, function(err){
       console.log(err);
     });
+    */
 
+    console.log("hello from index where the white people live at")
+    res.render('../src/views/index.ejs', {});
 });
 
 router.get('/users', function(req, res){

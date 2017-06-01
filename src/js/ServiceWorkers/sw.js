@@ -12,9 +12,9 @@ if ('serviceWorker' in navigator) {
 
 var CACHE_NAME = 'my-site-cache-v1';
 var urlsToCache = [
-  '/',
-  '/styles/styles.css',
-  '/script/main.js'
+  //'/',
+  '/styles.css'
+  //'/script/main.js'
 ];
 
 self.addEventListener('install', function(event) {
