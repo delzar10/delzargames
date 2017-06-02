@@ -4,6 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="/manifest.json">
     <link rel="shortcut icon" type="image/png" href="/images/Icons/delzargames-icon.png"/>
 
        <!--Import materialize.css-->
@@ -28,12 +29,12 @@
 
    <%# include('./header') #%>
 
-   <%#- include('game-gallery', {games: ps3Games, console: 'PS3'}) %>
-   <%#- include('game-gallery', {games: ps4Games, console: 'PS4'}) %>
-   <%#- include('game-gallery', {games: xbox360Games, console: 'XBOX 360'}) %>
-   <%#- include('game-gallery', {games: xboxOneGames, console: 'XBOX ONE'}) %>
-   <%#- include('game-gallery', {games: dsGames, console: '3DS'}) %>
-   <%#- include('game-gallery', {games: wiiuGames, console: 'WIIU'}) %>
+   <%- include('game-gallery', {games: ps3Games, console: 'PS3'}) %>
+   <%- include('game-gallery', {games: ps4Games, console: 'PS4'}) %>
+   <%- include('game-gallery', {games: xbox360Games, console: 'XBOX 360'}) %>
+   <%- include('game-gallery', {games: xboxOneGames, console: 'XBOX ONE'}) %>
+   <%- include('game-gallery', {games: dsGames, console: '3DS'}) %>
+   <%- include('game-gallery', {games: wiiuGames, console: 'WIIU'}) %>
 
    <%#- include footer #%>
    <%- include footer %>
@@ -41,11 +42,7 @@
 
     <div id="users">
     </div>
-
-    <script src="fetch.js"></script>
-    <script src="bootstrap.js"></script>
-    <script src="main.js"></script>
-    <script src="jqueryForms.js"></script>
-
+    <script src="vendor.js"></script>
+    <script src="main.js"></script> 
   </body>
 </html>

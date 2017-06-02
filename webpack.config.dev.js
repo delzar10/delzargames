@@ -3,15 +3,15 @@ import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
+let hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
+
 export default {
   //debug: true, // Shows debug information
   devtool: 'inline-source-map', // takes longer to generate because it is available to download when you want to inspect the code.
   //noInfo: false, //Webpack no muestra archivos a los que esta bundling
   entry: {
-    fetch: require.resolve('whatwg-fetch'),
-    bootstrap: require.resolve('bootstrap-sass'),
-    jqueryForms: path.resolve(__dirname, 'src/js/plugins/jquery.form.min'),
-    main: path.resolve(__dirname, 'src/index') //poner middleware para hot reloading
+    vendor: [path.resolve(__dirname, 'src/api/vendor'), hotMiddlewareScript],
+    main: [path.resolve(__dirname, 'src/index'), hotMiddlewareScript] //poner middleware para hot reloading
     //path.resolve(__dirname, 'src/index') //poner middleware para hot reloading
   },
   target: 'web', //target to web we can change to another kind
@@ -28,6 +28,9 @@ export default {
     }
   }*/
   plugins: [
+    
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
       new webpack.ProvidePlugin({
            $: 'jquery',
            jQuery: 'jquery',

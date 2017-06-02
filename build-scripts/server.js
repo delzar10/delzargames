@@ -18,7 +18,7 @@ import errorhandler    from 'error-handler';
 import {router}        from '../routes/router';
 import {database}      from '../lib/database';
 
-let port        = process.env.PORT || 9000;
+let port        = process.env.PORT || 8080;
 let app         = express();
 let compiler    = webpack(config);
 let mongoClient = mongoose.MongoClient;
@@ -58,13 +58,18 @@ class DevServer {
     initExpressMiddleWare() {
         // a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
         app.use(require('webpack-dev-middleware')(compiler, {
-            noInfo: false, // No especial info
+            noInfo: true, // No especial info
             stats: { colors: true },
             publicPath: config.output.publicPath // Public path
         }));
 
+        app.use(require("webpack-hot-middleware")(compiler, {
+            log: console.log, path: '/__webpack_hmr', heartbeat: 10 * 1000
+        }));
+
+
         //app.use(favicon(__dirname + '/public/images/favicon.ico'));
-        app.use(express.static('src'));
+        //app.use(express.static('src'));
         //app.use(express.static(__dirname + 'src'));
         app.use(morgan('dev'));
         app.use(bodyParser.urlencoded({ extended: true }));

@@ -24,10 +24,7 @@ router.get('/', function(req, res){
 
 router.get('/index', function(req, res){
 
-    /*
-
     Game.find({}).exec().then(result => {
-        console.log("bestArticles: " + result);
         req.app.locals.bestArticles = result;
     });
 
@@ -62,7 +59,6 @@ router.get('/index', function(req, res){
             return result;
         });
     }).then(function(result){
-        console.log(result);
         res.render('../src/views/index.ejs', {
             ps3Games: result[0],
             ps4Games: result[1],
@@ -74,9 +70,7 @@ router.get('/index', function(req, res){
     }).then(undefined, function(err){
       console.log(err);
     });
-    */
 
-    res.render('../src/views/index.ejs', {});
 });
 
 router.get('/users', function(req, res){
@@ -252,6 +246,7 @@ router.get('/admin', function(req, res){
 });
 
 router.get('/faqs', function(req, res){
+    //res.redirect('/index');
     res.render('../src/views/faqs.ejs');
 });
 

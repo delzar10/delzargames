@@ -5,6 +5,23 @@ class GamesController {
 
     constructor(router) {
         router.get('/', this.getGames.bind(this));
+        router.get('/:id', this.getGame.bind(this));
+        router.get('/best-selled', this.getBestSelledGames.bind(this));
+    }
+
+    getGame(req, res) {
+        console.log('*** getGame ***');
+        gamesRepo.getGame(req.params.id, (err, data) => {
+            if (err) {
+                console.log('*** getGame error: ' + util.inspect(err));
+                res.json({
+                    game: null
+                });
+            } else {
+                console.log('*** getGame ok');
+                res.json(data);
+            }
+        });
     }
 
     getGames(req, res) {
